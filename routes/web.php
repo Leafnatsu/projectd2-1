@@ -9,9 +9,9 @@ use App\Http\Controllers\DashboardController As Dashboard;
 
 require __DIR__.'/auth.php';
 
-// Route::get('/', function () {
-//     return view('dashboard.index');
-// });
+Route::get('/', function () {
+    return view('dashboard.adminhome');
+});
 
 // Route::name('promote.')->prefix('index')->group(function(){
 
@@ -32,9 +32,9 @@ require __DIR__.'/auth.php';
 
 
 
-Route::get('/', [App\Http\Controllers\IndexController::class, 'index'])->name('promote.index');
-Route::get('/menu', [App\Http\Controllers\MenuController::class, 'menu'])->name('promote.menu');
-Route::get('/cart', [App\Http\Controllers\CartController::class, 'cart'])->name('promote.cart');
+// Route::get('/', [App\Http\Controllers\IndexController::class, 'index'])->name('promote.index');
+// Route::get('/menu', [App\Http\Controllers\MenuController::class, 'menu'])->name('promote.menu');
+// Route::get('/cart', [App\Http\Controllers\CartController::class, 'cart'])->name('promote.cart');
 
 
 
