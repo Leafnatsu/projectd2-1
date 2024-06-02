@@ -1,5 +1,5 @@
 {{-- {{ asset('template/admin/ ')}} --}}
-
+<title>Giant Pizza</title>
 <link rel="icon" type="image/x-icon" href="{{ asset('template/admin/assets/img/favicon/favicon.ico')}}  " />
 
     <!-- Fonts -->

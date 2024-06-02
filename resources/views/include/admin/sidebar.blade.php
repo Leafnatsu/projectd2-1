@@ -59,7 +59,7 @@
                     </g>
                   </svg>
                 </span>
-                <span class="app-brand-text demo menu-text fw-bolder ms-2">DoraCha</span>
+                <span class="app-brand-text demo menu-text fw-bolder ms-2">Giant Piazza</span>
               </a>
 
               <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -71,8 +71,8 @@
 
             <ul class="menu-inner py-1">
               <!-- Dashboard -->
-              <li class="menu-item active">
-                <a href="#" class="menu-link">
+              <li class="menu-item">
+                <a href="{{ route('dashboard') }}" class="menu-link">
                   <i class="menu-icon tf-icons bx bx-home-circle"></i>
                   <div data-i18n="Analytics">Dashboard</div>
                 </a>
@@ -81,7 +81,7 @@
               <li class="menu-header small text-uppercase"><span class="menu-header-text">หน้า</span></li>
               <!-- Cards -->
               <li class="menu-item">
-                <a href="#" class="menu-link">
+                <a href="{{ route('dashboard.user') }}" class="menu-link">
                   <i class="menu-icon tf-icons bx bx-collection"></i>
                   <div data-i18n="Basic">User</div>
                 </a>
@@ -101,22 +101,15 @@
               <li class="menu-item">
                 <a href="#" class="menu-link">
                   <i class="menu-icon tf-icons bx bx-collection"></i>
-                  <div data-i18n="Basic">About</div>
+                  <div data-i18n="Basic">Order</div>
                 </a>
               </li>
               <li class="menu-item">
                 <a href="#" class="menu-link">
                   <i class="menu-icon tf-icons bx bx-collection"></i>
-                  <div data-i18n="Basic">Contect</div>
+                  <div data-i18n="Basic">Cart</div>
                 </a>
               </li>
-              <li class="menu-item">
-                <a href="#" class="menu-link">
-                  <i class="menu-icon tf-icons bx bx-collection"></i>
-                  <div data-i18n="Basic">Background</div>
-                </a>
-              </li>
-
 
             </ul>
           </aside>
