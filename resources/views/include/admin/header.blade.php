@@ -97,6 +97,14 @@
               @csrf
           </form>
           </li>
+          <li>
+            <a class="dropdown-item" href="{{ route('promote.index') }}">
+              <i class="bx bx-power-off me-2"></i>
+            </a>
+            <form id="logout-form" action="#" method="POST" class="d-none">
+              @csrf
+          </form>
+          </li>
         </ul>
       </li>
       <!--/ User -->
