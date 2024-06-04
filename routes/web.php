@@ -42,8 +42,14 @@ Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'admi
 Route::get('/dashboard/user', [App\Http\Controllers\UserController::class, 'user'])->name('dashboard.user');
 Route::get('/dashboard/products', [App\Http\Controllers\ProductsController::class, 'products'])->name('dashboard.products');
 Route::get('/dashboard/products/from_add', [App\Http\Controllers\ProductsController::class, 'from_add'])->name('dashboard.products.from');
+Route::post('/dashboard/products/add', [App\Http\Controllers\ProductsController::class, 'add'])->name('dashboard.products.add');
+
 Route::get('/dashboard/category', [App\Http\Controllers\CategoryController::class, 'category'])->name('dashboard.category');
 Route::get('/dashboard/category/from_add', [App\Http\Controllers\CategoryController::class, 'from_add'])->name('dashboard.category.from');
+Route::post('/dashboard/category/add', [App\Http\Controllers\CategoryController::class, 'add'])->name('dashboard.category.add');
+Route::get('/dashboard/category/edit/{id}', [App\Http\Controllers\CategoryController::class, 'edit'])->name('dashboard.category.edit');
+Route::post('/dashboard/category/update/{id}', [App\Http\Controllers\CategoryController::class, 'update'])->name('dashboard.category.update');
+Route::get('/dashboard/category/delete/{id}', [App\Http\Controllers\CategoryController::class, 'delete'])->name('dashboard.category.delete');
 
 
 

@@ -23,31 +23,31 @@
                   <th>updated_at</th>
                 </tr>
               </thead>
-          {{-- <tbody class="table-border-bottom-0">
-              @foreach ($typeproduct as $item)
+          <tbody class="table-border-bottom-0">
+              @foreach ($category as $key => $item)
               <tr>
-              <td>{{ $typeproduct->firstItem()+$loop->index}}</td>
-              <td>{{ $item->name }}</td>
+              {{-- <td>{{ $category->firstItem()+$loop->category}}</td> --}}
               <td>
-                <img src="{{ asset('admin/upload/type_product/'.$item->image)}}" width="100px" height="80px" alt="">
+                {{ $category->total() - ($category->firstItem() + $key) + 1 }}
               </td>
+              <td>{{ $item->name }}</td>
               <td>{{ $item->created_at }}</td>
               <td>{{ $item->updated_at }}</td>
               <td>
-                <a href="{{ route('adminpage.type-product.edit',$item->id) }}"><i class='bx bxs-edit btn btn-warning'>Edit</i></a>
-                <a href="{{ route('adminpage.type-product.delete',$item->id) }}"><i class='bx bx-trash btn btn-danger'>Delete</i></a>
+                <a href="{{ route('dashboard.category.edit',$item->id) }}"><i class='bx bxs-edit btn btn-warning'>Edit</i></a>
+                <a href="{{ route('dashboard.category.delete',$item->id) }}"><i class='bx bx-trash btn btn-danger'>Delete</i></a>
               </td>
               </tr>
               @endforeach
-            </tbody> --}}
+            </tbody>
           </table>
         </div>
       </div>
       <!--/ Basic Bootstrap Table -->
 
-      {{-- <hr class="my-5">
+      <hr class="my-5">
 
-      {{ $product->links('pagination::bootstrap-5') }} --}}
+      {{ $category->links() }}
 
 
     <div class="content-backdrop fade"></div>

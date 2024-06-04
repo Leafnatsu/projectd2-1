@@ -10,7 +10,7 @@ class Cart extends Model
 
     use HasFactory;
 
-    protected $table = 'carts';
+    protected $table = 'cart';
 
     protected $guarded = [
         'created_at',

@@ -11,13 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order', function (Blueprint $table) {
+
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('category_id')->nullable();
             $table->string('name')->nullabale();
+            $table->string('detail')->nullabale();
             $table->integer('price')->nullabale();
-            $table->longText('address')->nullabale();
+            $table->string('image')->nullabale();
+            $table->integer('created_by')->nullable()->comment('user ที่เพิ่ม');
+            $table->integer('updated_by')->nullable()->comment('user ที่แก้ไข');
             $table->timestamps();
         });
+
     }
 
     /**
@@ -25,8 +31,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        {
-            Schema::dropIfExists('order');
-        }
+        Schema::dropIfExists('products');
     }
+
 };
