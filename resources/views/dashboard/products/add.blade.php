@@ -14,15 +14,15 @@
                   <div class="col-md-11.5">
                     <div class="card mb-6">
                       <div class="card-body demo-vertical-spacing demo-only-element">
-                        <form action="#" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('dashboard.products.add') }}" method="post" enctype="multipart/form-data">
                           @csrf
-                          <h5>Typeproduct</h5>
+                          <h5>Category</h5>
                           <div class="input-group">
-                            <select name="id_type_product" class="form-control">
+                            <select name="id_categoryt" class="form-control">
                               <option selected> กรุณาเลือกประเภท </option>
-                              {{-- @foreach ($typeproduct as $item)
+                              @foreach ($category as $item)
                               <option value="{{$item->id}}"> {{$item->name}} </option>
-                              @endforeach --}}
+                              @endforeach
                             </select>
                           </div>
 
@@ -64,7 +64,7 @@
 
                           <h5>Image</h5>
                           <div class="input-group">
-                            <input type="file"name="image" class="form-control" id="inputGroupFile02" />
+                            <input type="file" name="image" class="form-control" id="inputGroupFile02" />
                             <label class="input-group-text" for="inputGroupFile02">Upload</label>
                           </div>
 

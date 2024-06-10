@@ -43,6 +43,10 @@ Route::get('/dashboard/user', [App\Http\Controllers\UserController::class, 'user
 Route::get('/dashboard/products', [App\Http\Controllers\ProductsController::class, 'products'])->name('dashboard.products');
 Route::get('/dashboard/products/from_add', [App\Http\Controllers\ProductsController::class, 'from_add'])->name('dashboard.products.from');
 Route::post('/dashboard/products/add', [App\Http\Controllers\ProductsController::class, 'add'])->name('dashboard.products.add');
+Route::get('/dashboard/products/edit/{id}', [App\Http\Controllers\ProductsController::class, 'edit'])->name('dashboard.products.edit');
+Route::post('/dashboard/products/update/{id}', [App\Http\Controllers\ProductsController::class, 'update'])->name('dashboard.products.update');
+Route::get('/dashboard/products/delete/{id}', [App\Http\Controllers\ProductsController::class, 'delete'])->name('dashboard.products.delete');
+
 
 Route::get('/dashboard/category', [App\Http\Controllers\CategoryController::class, 'category'])->name('dashboard.category');
 Route::get('/dashboard/category/from_add', [App\Http\Controllers\CategoryController::class, 'from_add'])->name('dashboard.category.from');

@@ -18,7 +18,7 @@
             <thead>
               <tr>
                 <th>No</th>
-                <th>Typeproduct</th>
+                <th>Category</th>
                 <th>Name</th>
                 <th>Detail</th>
                 <th>Price</th>
@@ -27,11 +27,11 @@
                 <th>updated_at</th>
               </tr>
             </thead>
-            {{-- <tbody class="table-border-bottom-0">
-              @foreach ($product as $item)
+            <tbody class="table-border-bottom-0">
+              @foreach ($products as $key => $item)
               <tr>
-              <td>{{ $product->firstItem()+$loop->index}}</td>
-              <td>{{ $item->type_products->name }}</td>
+              {{-- <td>{{ $product->total() - ($product->firstItem() + $key) + 1 }}</td> --}}
+              <td>{{ $item->category->name }}</td>
               <td>{{ $item->name }}</td>
               <td>{{ $item->detail }}</td>
               <td>{{ $item->price }}</td>
@@ -46,15 +46,15 @@
               </td>
               </tr>
               @endforeach
-            </tbody> --}}
+            </tbody>
           </table>
         </div>
       </div>
       <!--/ Basic Bootstrap Table -->
 
-      {{-- <hr class="my-5">
+      <hr class="my-5">
 
-      {{ $product->links('pagination::bootstrap-5') }} --}}
+      {{-- {{ $products->links() }} --}}
 
 
     <div class="content-backdrop fade"></div>
