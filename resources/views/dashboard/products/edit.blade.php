@@ -1,84 +1,148 @@
 @extends('layouts.admin')
 @section('content')
 
-          <!-- Content wrapper -->
-          <div class="content-wrapper">
-            <!-- Content -->
+    <!-- Content wrapper -->
+    <div class="content-wrapper">
+        <!-- Content -->
 
-            <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms Edit/</span> product</h4>
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">
+                สินค้า/
+                </span>
+                แก้ไขสินค้า
+            </h4>
 
-              <div class="row">
-                <!-- Basic -->
+            <div class="d-flex justify-content-center">
                 <div class="row">
-                  <div class="col-md-11.5">
-                    <div class="card mb-6">
-                      <div class="card-body demo-vertical-spacing demo-only-element">
-                        <form action="#" method="post"enctype="multipart/form-data">
-                          @csrf
-                          <h5>Typeproduct</h5>
-                          <div class="input-group">
-                            <select name="id_type_product" class="form-control">
-                              {{-- @foreach ($typeproduct as $item)
-                              <option value="{{$item->id}}"> {{$item->name}} </option>
-                              @endforeach --}}
-                            </select>
-                          </div>
+                    <div class="col-auto">
+                        <div class="card">
+                            <div class="card-body demo-vertical-spacing demo-only-element">
+                                {{-- @foreach ($products as $products) --}}
+                                <form action="{{ route('dashboard.product.update', $products->id) }}" method="post"
+                                    enctype="multipart/form-data">
 
-                            <h5>Name</h5>
-                            <div class="input-group">
-                          <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Name"
-                          aria-label="Name"
-                          aria-describedby="basic-addon11"
-                          name="name"
-                          {{-- value="{{$product->name}}" --}}
-                          />
+                                    @csrf
+
+                                    <div class="mb-3">
+                                        <label for="productName" class="form-label">
+                                            ชื่อสินค้า
+                                            @error('product_name')
+                                                <span class="text-danger">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
+                                        </label>
+                                        <input type="text"
+                                            class="form-control {{ $errors->has('product_name') ? 'is-invalid' : null }}"
+                                            id="productName"
+                                            name="product_name"
+                                            placeholder="ชื่อสินค้า"
+                                            value="{{$products->name}}"
+                                            />
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="productPrice" class="form-label">
+                                            ราคา
+                                            @error('product_price')
+                                                <span class="text-danger">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
+                                        </label>
+                                        <input type="number"
+                                            class="form-control {{ $errors->has('product_price') ? 'is-invalid' : null }}"
+                                            id="productPrice"
+                                            name="product_price"
+                                            placeholder="ราคา"
+                                            pattern="[0-9]*"
+                                            min="0" max="99999999"
+                                            onkeypress="validate(event)"
+                                            value="{{$products->price}}"
+                                            />
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="categoryId" class="form-label">
+                                            ประเภทสินค้า
+                                            @error('product_category')
+                                                <span class="text-danger">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
+                                        </label>
+                                        <select
+                                            class="form-select {{ $errors->has('product_category') ? 'is-invalid' : null }}"
+                                            id="categoryId"
+                                            name="product_category">
+                                            <option value="" selected>
+                                                ==== โปรดเลือกประเภทสินค้า ====
+                                            </option>
+                                            @foreach ($category as $category)
+                                                <option value="{{ $category->id }}">
+                                                    {{ $category->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="ProductImage" class="form-label">
+                                            รูปสินค้า
+                                            @error('product_image')
+                                                <span class="text-danger">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
+                                        </label>
+                                        <input
+                                            class="form-control {{ $errors->has('product_image') ? 'is-invalid' : null }}"
+                                            type="file"
+                                            name="product_image"
+                                            id="ProductImage"
+                                            value="{{$products->image}}"
+                                            />
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="ProductDetail" class="form-label">
+                                            รายละเอียดสินค้า
+                                            @error('product_detail')
+                                                <span class="text-danger">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
+                                        </label>
+                                        <textarea class="form-control {{ $errors->has('product_detail') ? 'is-invalid' : null }}"
+                                            id="ProductDetail"
+                                            name="product_detail"
+                                            placeholder="รายละเอียด"
+                                            rows="0"
+                                            value="{{$products->detail}}"
+                                            ></textarea>
+                                    </div>
+
+                                    <div class="mb-0 mt-3 text-center">
+                                        <button class="btn btn-success">
+                                            บันทึกข้อมูล
+                                        </button>
+                                        <a href="{{ route('dashboard.product.index') }}" class="btn btn-secondary">
+                                            ยกเลิก
+                                        </a>
+                                    </div>
+
+                                </form>
+                                {{-- @endforeach --}}
+                            </div>
                         </div>
-
-                        <h5>Detail</h5>
-                        <div class="input-group">
-                            <input
-                            type="text"
-                          class="form-control"
-                          placeholder="Detail"
-                          aria-label="Detail"
-                          aria-describedby="basic-addon11"
-                          name="detail"
-                          {{-- value="{{$product->detail}}" --}}
-                            />
-                          </div>
-
-                          <h5>Price</h5>
-                          <div class="input-group">
-                              <input
-                              type="text"
-                            class="form-control"
-                            placeholder="Price"
-                            aria-label="Price"
-                            aria-describedby="basic-addon11"
-                            name="price"
-                            {{-- value="{{$product->price}}" --}}
-                            />
-                          </div>
-
-                          <h5>Image</h5>
-                          <div class="input-group">
-                            <input type="file" name="image"
-                            {{-- value="{{$product->image}}"  --}}
-                            class="form-control" id="inputGroupFile02" />
-                            <label class="input-group-text" for="inputGroupFile02">Upload</label>
-                          </div>
-
-                          <Button type="submit" value="บันทึก" class="btn btn-success mt-3" >บันทึก</Button>
-                          <a href="#" class="btn btn-danger mt-3 mx-2">ย้อนกลับ</a>
-                        </div>
-                      </div>
                     </div>
-              </form>
+                </div>
             </div>
-            <!-- / Content -->
+            <!-- ./Form -->
 
-      @stop
+        </div>
+        <!-- ./Content -->
+
+    </div>
+@endsection

@@ -11,14 +11,18 @@ class Products extends Model
     use HasFactory;
 
     protected $table = 'products';
-    protected $fillable = ['name','detail','price','image'];
-    // protected $guarded = [
-    //     'created_at',
-    //     'updated_at',
-    // ];
-    public function type_products()
+
+    // protected $fillable = ['name','detail','price','image'];
+
+    protected $guarded = [
+        'created_at',
+        // 'updated_at',
+    ];
+
+    public function category()
     {
-        return $this->belongsTo(TypeProduct::class, 'id_category', 'id');
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
+
 }
 

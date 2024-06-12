@@ -23,6 +23,7 @@
 
     <link rel="stylesheet" href="{{ asset('assets/template/admin/assets/vendor/libs/apex-charts/apex-charts.css')}}" />
 
+    <link rel="stylesheet" href="{{ asset('assets/lightbox2/css/lightbox.min.css') }}">
     <!-- Page CSS -->
 
     <!-- Helpers -->
