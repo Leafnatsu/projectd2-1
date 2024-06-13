@@ -9,7 +9,7 @@ use App\Http\Controllers\DashboardController As Dashboard;
 // FrontEnd
 
 // BackEnd
-Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group(function() {
+Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'isAdmin'])->group(function() {
 
     // Root of Dashboard
     Route::get('/', [Dashboard::class, 'Index'])->name('index');
@@ -24,20 +24,37 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group(func
         Route::get('add', [Dashboard::class, 'ProductAdd'])->name('add');
         Route::post('add', [Dashboard::class, 'ProductInsert'])->name('insert');
         // Edit Page
-        Route::get('edit', [Dashboard::class, 'ProductEdit'])->name('edit');
-        Route::post('edit', [Dashboard::class, 'ProductUpdate'])->name('update');
+        Route::get('edit/{id}', [Dashboard::class, 'ProductEdit'])->name('edit');
+        Route::post('edit/{id}', [Dashboard::class, 'ProductUpdate'])->name('update');
+        // Delete
+        Route::get('delete/{id}', [Dashboard::class, 'ProductDelete'])->name('delete');
 
     });
+    Route::prefix('category')->name('category.')->group(function() {
 
-    // Route::get('product/add', [Dashboard::class, 'product_add'])->name('product.add');
+        // First Page Admin
+        Route::get('/', [Dashboard::class, 'Category'])->name('index');
+
+        // Add Page
+        Route::get('add', [Dashboard::class, 'CategoryAdd'])->name('add');
+        Route::post('add', [Dashboard::class, 'CategoryInsert'])->name('insert');
+        // Edit Page
+        Route::get('edit/{id}', [Dashboard::class, 'CategoryEdit'])->name('edit');
+        Route::post('edit/{id}', [Dashboard::class, 'CategoryUpdate'])->name('update');
+        // Delete
+        Route::get('delete/{id}', [Dashboard::class, 'CategoryDelete'])->name('delete');
+
+    });
 
     // Route::get('category', [Dashboard::class, 'category'])->name('category');
 
 });
 
-// Route::get('/', function () {
-//     return view('dashboard.user.index');
-// });
+Route::get('/', function () {
+
+    print 'หน้าแรก';
+
+})->name('default');
 
 // Route::name('promote.')->prefix('index')->group(function(){
 

@@ -17,14 +17,35 @@ class DashboardController extends Controller
         return view('dashboard.admin');
     }
 
-    public function Product()
+    public function Product(Request $req)
     {
+
+        $product = Products::query();
+
+        if(!empty($req->search))
+        {
+
+            $keyword = $req->search;
+
+            $product->where(function ($query) use ($keyword) {
+
+                $query->where('name', 'LIKE', '%' .$keyword. '%')
+                    ->orWhere('detail', 'LIKE', '%' .$keyword. '%')
+                ->orWhere('price', 'LIKE', '%' .$keyword. '%');
+
+            });
+
+        }
+
+        $result = $product->paginate(10);
+
         return view(
             'dashboard.products.index',
             [
-                'products' => Products::paginate(10),
+                'products' => $result,
             ]
         );
+
     }
 
     public function ProductAdd()
@@ -86,26 +107,43 @@ class DashboardController extends Controller
 
     }
 
-    public function ProductEdit(Request $id)
+    public function ProductEdit($id=null)
     {
-        return view(
-            'dashboard.products.edit',
-            [
-                'category' => Category::all(),
-                'products' => Products::all(),
-            ]
-        );
+
+        $product = Products::find($id);
+
+        if(!empty($product->id))
+
+            return view(
+                'dashboard.products.edit',
+                [
+                    'category' => Category::all(),
+                    'products' => $product,
+                ]
+            );
+
+        else
+            return redirect()->route('dashboard.product.index');
+
     }
 
     public function ProductUpdate(Request $req, $id)
     {
-        $products = Products::find($id);
+
+        $product = Products::find($id);
+
+        if(empty($product->id))
+        {
+            alert()->error('แจ้งเตือน', 'ผิดพลาดไม่สามารถแก้ไขได้, โปรดลองใหม่อีกครั้ง');
+            return redirect()->route('dashboard.product.index');
+        }
+
         $req->validate(
             [
                 'product_name' => 'required',
                 'product_price' => 'required',
                 'product_category' => 'required',
-                'product_image' => 'required|image',
+                'product_image' => 'nullable|image',
                 'product_detail' => 'required',
             ],
             [
@@ -122,10 +160,10 @@ class DashboardController extends Controller
         {
             $image = $req->product_image->store('products');
         }else{
-            $image = null;
+            $image = $product->image;
         }
 
-        $update = Products::update(
+        $update = $product->update(
             [
                 'name' => $req->product_name,
                 'price' => $req->product_price,
@@ -135,16 +173,167 @@ class DashboardController extends Controller
             ]
         );
 
-        if(!empty($create))
+        if(!empty($update))
         {
-            alert()->success('แจ้งเตือน','เพิ่มรายการสินค้าสำเร็จ');
+            alert()->success('แจ้งเตือน','แก้ไขรายการสินค้าสำเร็จ');
             return redirect()->route('dashboard.product.index');
         }else{
-            alert()->error('แจ้งเตือน','เพิ่มรายการสินค้าไม่สำเร็จ');
+            alert()->error('แจ้งเตือน','แก้ไขการสินค้าไม่สำเร็จ');
             return redirect()->route('dashboard.product.add');
         }
 
     }
+
+    public function ProductDelete($id=null)
+    {
+
+        $product = Products::find($id);
+
+        if(!empty($product->id))
+        {
+            $product->delete();
+            alert()->success('แจ้งเตือน', 'ลบสำเร็จ');
+            return redirect()->route('dashboard.product.index');
+        }else{
+            alert()->error('แจ้งเตือน', 'ผิดพลาดไม่สามารถลบได้, โปรดลองใหม่อีกครั้ง');
+            return redirect()->route('dashboard.product.index');
+        }
+
+    }
+    public function Category(Request $req)
+    {
+
+        $category = Category::query();
+
+        // if(!empty($req->search))
+        // {
+
+        //     $keyword = $req->search;
+
+        //     $product->where(function ($query) use ($keyword) {
+
+        //         $query->where('name', 'LIKE', '%' .$keyword. '%')
+        //             ->orWhere('detail', 'LIKE', '%' .$keyword. '%')
+        //         ->orWhere('price', 'LIKE', '%' .$keyword. '%');
+
+        //     });
+
+        // }
+
+        $result = $category->paginate(10);
+
+        return view(
+            'dashboard.category.index',
+            [
+                'category' => $result,
+            ]
+        );
+
+    }
+
+    public function CategoryAdd()
+    {
+        return view(
+            'dashboard.category.add',
+        );
+    }
+
+    public function CategoryInsert(Request $req)
+    {
+
+        $req->validate(
+            [
+                'category_name' => 'required',
+            ],
+            [
+                'category_name.required' => '*โปรดกรอกชื่อประเภทสินค้า',
+            ]
+        );
+
+        $create = Category::create(
+            [
+                'name' => $req->category_name,
+            ]
+        );
+
+        if(!empty($create))
+        {
+            alert()->success('แจ้งเตือน','เพิ่มประเภทสินค้าสำเร็จ');
+            return redirect()->route('dashboard.category.index');
+        }else{
+            alert()->error('แจ้งเตือน','เพิ่มประเภทสินค้าไม่สำเร็จ');
+            return redirect()->route('dashboard.category.add');
+        }
+
+    }
+
+    public function CategoryEdit($id=null)
+    {
+
+        $category = Category::find($id);
+
+        if(!empty($category->id))
+
+            return view(
+                'dashboard.category.edit',
+                [
+                    'category' => $category,
+                ]
+            );
+
+        else
+            return redirect()->route('dashboard.category.index');
+
+    }
+
+    public function CategoryUpdate(Request $req, $id)
+    {
+
+        $category = Category::find($id);
+
+        if(empty($category->id))
+        {
+            alert()->error('แจ้งเตือน', 'ผิดพลาดไม่สามารถแก้ไขได้, โปรดลองใหม่อีกครั้ง');
+            return redirect()->route('dashboard.category.index');
+        }
+
+        $req->validate(
+            [
+                'category_name' => 'required',
+            ],
+            [
+                'category_name.required' => '*โปรดกรอกชื่อประเภทสินค้า',
+            ]
+        );
+
+        if(!empty($update))
+        {
+            alert()->success('แจ้งเตือน','แก้ไขประเภทสินค้าสำเร็จ');
+            return redirect()->route('dashboard.category.index');
+        }else{
+            alert()->error('แจ้งเตือน','แก้ไขประเภทสินค้าไม่สำเร็จ');
+            return redirect()->route('dashboard.category.add');
+        }
+
+    }
+
+    public function CategoryDelete($id=null)
+    {
+
+        $category = Category::find($id);
+
+        if(!empty($category->id))
+        {
+            $category->delete();
+            alert()->success('แจ้งเตือน', 'ลบสำเร็จ');
+            return redirect()->route('dashboard.category.index');
+        }else{
+            alert()->error('แจ้งเตือน', 'ผิดพลาดไม่สามารถลบได้, โปรดลองใหม่อีกครั้ง');
+            return redirect()->route('dashboard.category.index');
+        }
+
+    }
+
 
     // public function product()
     // {

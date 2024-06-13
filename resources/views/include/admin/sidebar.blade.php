@@ -40,7 +40,7 @@
             </a>
         </li>
         <li class="menu-item">
-            <a href="#" class="menu-link">
+            <a href="{{ route('dashboard.category.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-category"></i>
                 <div data-i18n="Basic">ประเภทสินค้า</div>
             </a>

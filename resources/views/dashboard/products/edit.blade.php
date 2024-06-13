@@ -18,9 +18,7 @@
                     <div class="col-auto">
                         <div class="card">
                             <div class="card-body demo-vertical-spacing demo-only-element">
-                                {{-- @foreach ($products as $products) --}}
-                                <form action="{{ route('dashboard.product.update', $products->id) }}" method="post"
-                                    enctype="multipart/form-data">
+                                <form action="{{ route('dashboard.product.update', $products->id) }}" method="post" enctype="multipart/form-data">
 
                                     @csrf
 
@@ -38,7 +36,7 @@
                                             id="productName"
                                             name="product_name"
                                             placeholder="ชื่อสินค้า"
-                                            value="{{$products->name}}"
+                                            value="{{ $products->name }}"
                                             />
                                     </div>
 
@@ -59,7 +57,7 @@
                                             pattern="[0-9]*"
                                             min="0" max="99999999"
                                             onkeypress="validate(event)"
-                                            value="{{$products->price}}"
+                                            value="{{ $products->price }}"
                                             />
                                     </div>
 
@@ -76,11 +74,11 @@
                                             class="form-select {{ $errors->has('product_category') ? 'is-invalid' : null }}"
                                             id="categoryId"
                                             name="product_category">
-                                            <option value="" selected>
+                                            <option value="">
                                                 ==== โปรดเลือกประเภทสินค้า ====
                                             </option>
                                             @foreach ($category as $category)
-                                                <option value="{{ $category->id }}">
+                                                <option value="{{ $category->id }}" {{ $category->id == $products->category_id ? 'selected' : null }}>
                                                     {{ $category->name }}
                                                 </option>
                                             @endforeach
@@ -101,9 +99,28 @@
                                             type="file"
                                             name="product_image"
                                             id="ProductImage"
-                                            value="{{$products->image}}"
-                                            />
+                                        />
                                     </div>
+
+                                    @if (!empty($products->image))
+                                        <div class="mb-3 text-center">
+                                            <label for="ProductImageView" class="form-label text-secondary">
+                                                รูปสินค้าเดิม
+                                            </label>
+                                            <a href="{{ asset($products->image) }}"
+                                                data-lightbox="{{ $products->id }}"
+                                                data-title="{{ $products->name }}"
+                                            >
+                                                <img
+                                                    src="{{ asset($products->image) }}"
+                                                    width="128px"
+                                                    height="128px"
+                                                    class="img-thumbnail rounded-3 mx-auto d-block"
+                                                    alt="{{ $products->name }}"
+                                                />
+                                            </a>
+                                        </div>
+                                    @endif
 
                                     <div class="mb-3">
                                         <label for="ProductDetail" class="form-label">
@@ -119,13 +136,12 @@
                                             name="product_detail"
                                             placeholder="รายละเอียด"
                                             rows="0"
-                                            value="{{$products->detail}}"
-                                            ></textarea>
+                                        >{{ $products->detail }}</textarea>
                                     </div>
 
                                     <div class="mb-0 mt-3 text-center">
-                                        <button class="btn btn-success">
-                                            บันทึกข้อมูล
+                                        <button class="btn btn-primary">
+                                            แก้ไขข้อมูล
                                         </button>
                                         <a href="{{ route('dashboard.product.index') }}" class="btn btn-secondary">
                                             ยกเลิก
@@ -133,7 +149,8 @@
                                     </div>
 
                                 </form>
-                                {{-- @endforeach --}}
+
+
                             </div>
                         </div>
                     </div>
