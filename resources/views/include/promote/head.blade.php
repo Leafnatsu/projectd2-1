@@ -25,3 +25,4 @@
     <link rel="stylesheet" href="{{ asset('assets/fn/css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/fn/css/icomoon.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/fn/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/lightbox2/css/lightbox.min.css') }}">

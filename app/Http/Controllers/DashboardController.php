@@ -294,6 +294,7 @@ class DashboardController extends Controller
         if(empty($category->id))
         {
             alert()->error('แจ้งเตือน', 'ผิดพลาดไม่สามารถแก้ไขได้, โปรดลองใหม่อีกครั้ง');
+            print 'error record';
             return redirect()->route('dashboard.category.index');
         }
 
@@ -303,6 +304,12 @@ class DashboardController extends Controller
             ],
             [
                 'category_name.required' => '*โปรดกรอกชื่อประเภทสินค้า',
+            ]
+        );
+
+        $update = $category->update(
+            [
+                'name' => $req->category_name,
             ]
         );
 

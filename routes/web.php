@@ -3,10 +3,31 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\DashboardController As Dashboard;
+use App\Http\Controllers\CustomerController As Front;
 // use App\Http\Controllers\IndexController As Index;
 // use App\Http\Controllers\MenuController As Menu;
 
-// FrontEnd
+// HomePage
+Route::get('/', [Front::class, 'home'])->name('home');
+
+// Menu
+Route::prefix('menu')->name('menu.')->group(function() {
+
+    // Root of Dashboard
+    Route::get('/', [Front::class, 'menu'])->name('index');
+
+});
+
+// Cart
+Route::prefix('cart')->name('cart.')->middleware(['auth'])->group(function() {
+
+    // Root of Dashboard
+    Route::get('/', [Front::class, 'cart'])->name('index');
+
+    // Add Product to Cart
+
+});
+
 
 // BackEnd
 Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'isAdmin'])->group(function() {
@@ -50,11 +71,18 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'isAdmin'])-
 
 });
 
-Route::get('/', function () {
+// Route::get('/', function () {
 
-    print 'หน้าแรก';
+//     print 'หน้าแรก';
 
-})->name('default');
+// })->name('default');
+// Route::prefix('product')->name('product.')->middleware(['auth'])->group(function() {
+
+
+
+
+// });
+
 
 // Route::name('promote.')->prefix('index')->group(function(){
 

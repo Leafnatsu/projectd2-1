@@ -10,7 +10,7 @@
 
                     <div class="col-md-7 col-sm-12 text-center ftco-animate">
                         <h1 class="mb-3 mt-5 bread">Our Menu</h1>
-                        <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('promote.index') }}">Home</a></span>
+                        <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">Home</a></span>
                             <span>Menu</span></p>
                     </div>
 
@@ -20,91 +20,78 @@
     </section>
 
     <section class="ftco-section">
-        <div class="container">
-            <div class="row justify-content-center mb-5 pb-3">
-                <div class="col-md-7 heading-section ftco-animate text-center">
-                    <h2 class="mb-4">rice menu</h2>
-                </div>
-            </div>
-        </div>
-        <div class="container-wrap">
-            <div class="row no-gutters d-flex">
-                <div class="col-lg-4 d-flex ftco-animate">
-                    <div class="services-wrap d-flex">
-                        <a href="#" class="img"
-                            style="background-image: url(assets/fn/images/20230409_183139.jpg);"></a>
-                        <div class="text p-4">
-                            <h3>Minced Beef Curry Rice</h3>
-                            <p>ข้าวแกงกะหรี่เนื้อบด ข้าวสวยร้อน ราดด้วย แกงกะหรี่สูตรญี่ปุ่น ท็อปปิ้งเป็น เนื้อแฮมเบิร์กสูตร
-                                พิเศษ</p>
-                            <p class="price"><span>99.00฿</span> <a href="#"
-                                    class="ml-2 btn btn-white btn-outline-white">Order</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 d-flex ftco-animate">
-                    <div class="services-wrap d-flex">
-                        <a href="#" class="img"
-                            style="background-image: url(assets/fn/images/20230406_224440.jpg);"></a>
-                        <div class="text p-4">
-                            <h3>Beef Rice bowl</h3>
-                            <p>ข้าวหน้าเนื้อ เป็นข้าวราด เนื้อผัด ด้วยหอมใหญ่ สไตล์ญี่ปุ่น</p>
-                            <p class="price"><span>89.00฿</span> <a href="#"
-                                    class="ml-2 btn btn-white btn-outline-white">Order</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 d-flex ftco-animate">
-                    <div class="services-wrap d-flex">
-                        <a href="#" class="img"
-                            style="background-image: url(assets/fn/images/20230407_185318.jpg);"></a>
-                        <div class="text p-4">
-                            <h3>Fried Chicken on Rice</h3>
-                            <p>ข้าวสวยร้อน ท็อปด้วยกะหล่ำปลีหั่นฝอย และไก่ทอด ราดด้วยซอสเทอริยากิ</p>
-                            <p class="price"><span>89.00฿</span> <a href="#"
-                                    class="ml-2 btn btn-white btn-outline-white">Order</a></p>
+
+        @if (!empty($categorys))
+
+            @foreach ($categorys as $item)
+
+                <div class="container mt-5">
+                    <div class="row justify-content-center mb-5 pb-3">
+                        <div class="col-md-7 heading-section ftco-animate text-center">
+                            <h2 class="mb-4">
+                                {{ $item->name }}
+                            </h2>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-4 d-flex ftco-animate">
-                    <div class="services-wrap d-flex">
-                        <a href="#" class="img order-lg-last"
-                            style="background-image: url(assets/fn/images/20230407_193706.jpg);"></a>
-                        <div class="text p-4">
-                            <h3>Chicken Curry Rice</h3>
-                            <p>ข้าวสวยร้อน ราดด้วย แกงกะหรี่สูตรญี่ปุ่น</p>
-                            <p class="price"><span>79.00฿</span> <a href="#"
-                                    class="ml-2 btn btn-white btn-outline-white">Order</a></p>
-                        </div>
+                <div class="container-wrap">
+                    <div class="row no-gutters d-flex">
+
+                        @if (!empty($item->product))
+
+                            @foreach ($item->product as $product)
+
+                                <div class="col-lg-4 d-flex ftco-animate">
+                                    <div class="services-wrap d-flex">
+                                        <a
+                                            href="{{ asset($product->image) }}"
+                                            data-lightbox="{{ $product->id }}"
+                                            data-title="{{ $product->name }}"
+                                            class="img"
+                                            style="background-image: url('{{ asset($product->image) }}');"
+                                        ></a>
+                                        <div class="text p-4">
+                                            <h3>
+                                                {{ $product->name }}
+                                            </h3>
+                                            <p>{{ $product->detail }}</p>
+                                            <p class="price">
+                                                <span>{{ number_format($product->price, 2) }}฿</span>
+                                                <a href="#" class="ml-2 btn btn-white btn-outline-white">
+                                                    สั่งอาหาร
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            @endforeach
+
+                        @else
+                            <div class="col-lg-4 d-flex ftco-animate text-center text-danger h1">
+                                ไม่มีเมนูอาหาร
+                            </div>
+                        @endif
+
                     </div>
                 </div>
-                <div class="col-lg-4 d-flex ftco-animate">
-                    <div class="services-wrap d-flex">
-                        <a href="#" class="img order-lg-last"
-                            style="background-image: url(assets/fn/images/20230407_193841.jpg);"></a>
-                        <div class="text p-4">
-                            <h3>Fried Chicken Curry Rice</h3>
-                            <p>ข้าวสวยร้อน ราดด้วย แกงกะหรี่สูตรญี่ปุ่น ท็อปปิ้งเป็นไก่ทอด</p>
-                            <p class="price"><span>89.00฿</span> <a href="#"
-                                    class="ml-2 btn btn-white btn-outline-white">Order</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 d-flex ftco-animate">
-                    <div class="services-wrap d-flex">
-                        <a href="#" class="img order-lg-last"
-                            style="background-image: url(assets/fn/images/20230408_041200.jpg);"></a>
-                        <div class="text p-4">
-                            <h3>Ham and Egg Condensed Rice</h3>
-                            <p>ข้าวสวยร้อน ราดด้วย แฮมและไข่ข้น โรยหน้าด้วยหอมซอย</p>
-                            <p class="price"><span>79.00฿</span> <a href="#"
-                                    class="ml-2 btn btn-white btn-outline-white">Order</a></p>
-                        </div>
+
+            @endforeach
+
+
+        @else
+            <div class="container">
+                <div class="row justify-content-center mb-5 pb-3">
+                    <div class="col-md-7 heading-section ftco-animate text-center">
+                        <h2 class="mb-4 h1 text-center fw-bolder text-danger">
+                            ไม่มีข้อมูลอาหาร
+                        </h2>
                     </div>
                 </div>
             </div>
-        </div>
+        @endif
+
 
         <div class="container">
             <div class="row justify-content-center mb-5 pb-3 mt-5 pt-5">
@@ -279,4 +266,5 @@
             </div>
         </div>
     </section>
-@stop
+
+@endsection
