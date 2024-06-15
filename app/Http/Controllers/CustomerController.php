@@ -25,4 +25,8 @@ class CustomerController extends Controller
 
     }
 
+    public function home()
+    {
+        return view('frontend.home.index');
+    }
 }

@@ -14,5 +14,4 @@ class MenuController extends Controller
     {
         return view('promote.menu');
     }
-
 }

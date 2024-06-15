@@ -100,7 +100,7 @@
                         </form>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{ route('home') }}">
                             <i class="bx bx-power-off me-2"></i>
                         </a>
                         <form id="logout-form" action="#" method="POST" class="d-none">

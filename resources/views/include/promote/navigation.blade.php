@@ -21,7 +21,7 @@
                         </a></li>
                     @else
                     <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">
-                            เข้าสู่ระบบ
+                        ตระกร้าสินค้า
                         </a></li>
                     @endauth
                     @auth
