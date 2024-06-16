@@ -205,20 +205,18 @@ class DashboardController extends Controller
 
         $category = Category::query();
 
-        // if(!empty($req->search))
-        // {
+        if(!empty($req->search))
+        {
 
-        //     $keyword = $req->search;
+            $keyword = $req->search;
 
-        //     $product->where(function ($query) use ($keyword) {
+            $category->where(function ($query) use ($keyword) {
 
-        //         $query->where('name', 'LIKE', '%' .$keyword. '%')
-        //             ->orWhere('detail', 'LIKE', '%' .$keyword. '%')
-        //         ->orWhere('price', 'LIKE', '%' .$keyword. '%');
+                $query->where('name', 'LIKE', '%' .$keyword. '%');
 
-        //     });
+            });
 
-        // }
+        }
 
         $result = $category->paginate(10);
 

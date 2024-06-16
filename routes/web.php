@@ -104,8 +104,8 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'isAdmin'])-
 
 
 // Route::get('/', [App\Http\Controllers\IndexController::class, 'index'])->name('promote.index');
-Route::get('/menu', [App\Http\Controllers\MenuController::class, 'menu'])->name('promote.menu');
-Route::get('/cart', [App\Http\Controllers\CartController::class, 'cart'])->name('promote.cart');
+// Route::get('/menus', [App\Http\Controllers\MenuController::class, 'menu'])->name('promote.menu');
+// Route::get('/cart', [App\Http\Controllers\CartController::class, 'cart'])->name('promote.cart');
 
 
 

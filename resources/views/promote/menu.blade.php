@@ -10,7 +10,7 @@
 
                     <div class="col-md-7 col-sm-12 text-center ftco-animate">
                         <h1 class="mb-3 mt-5 bread">Our Menu</h1>
-                        <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('promote.index') }}">Home</a></span>
+                        <p class="breadcrumbs"><span class="mr-2"><a href="#">Home</a></span>
                             <span>Menu</span></p>
                     </div>
 
