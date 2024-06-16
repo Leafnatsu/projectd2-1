@@ -25,26 +25,13 @@
                         <ul>
                             <li><span class="icon icon-map-marker"></span><span class="text">2456
                                     หมู่บ้านเสนาวิลล่าถนนแฮปปี้แลนด์ แขวงคลองจั่น เขตบางกะปิ กรุงเทพฯ 10240</span></li>
-                            <li><a href="#"><span class="icon icon-phone"></span><span class="text">090 - 664 -
+                            <li><a><span class="icon icon-phone"></span><span class="text">090 - 664 -
                                         6949</span></a></li>
-                            <li><a href="#"><span class="icon icon-envelope"></span><span
+                            <li><a><span class="icon icon-envelope"></span><span
                                         class="text">yaminlunla@hotmail.com</span></a></li>
                         </ul>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 text-center">
-
-                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    Copyright &copy;
-                    <script>
-                        document.write(new Date().getFullYear());
-                    </script> All rights reserved | This template is made with <i class="icon-heart"
-                        aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                </p>
             </div>
         </div>
     </div>
