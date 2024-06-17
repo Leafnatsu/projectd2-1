@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\Products;
 use App\Models\Category;
+use App\Models\Cart;
 
 class CustomerController extends Controller
 {
@@ -25,39 +28,53 @@ class CustomerController extends Controller
         return view('frontend.cart.index');
     }
 
-    public function addtocart(Request $request)
+    public function addtocart(Request $req)
     {
-        $productId = $request->input('product_id');
-        $quantity = $request->input('quantity');
 
-        // ดึงข้อมูลสินค้าจากฐานข้อมูล
-        $product = Product::find($productId);
+        if(
+            !empty($req->product_id) &&
+            !empty($req->quantity)
+        )
+        {
 
-        if (!$product) {
-            return redirect()->back()->with('error', 'Product not found.');
+            $auth = Auth::user();
+
+            $cart_checker = Cart::query()
+                ->where('user_id', $auth->id)
+                ->where('product_id', $req->product_id)
+                ->whereNull('order_id')
+            ->first();
+
+            if(!empty($cart_checker->id))
+            {
+
+                $update_qty = Cart::find($cart_checker->id);
+
+                $update_qty->update(
+                    [
+                        'quantity' => $cart_checker->quantity + $req->quantity,
+                    ]
+                );
+
+            }else{
+
+                $cart = Cart::create(
+                    [
+                        'user_id' => $auth->id,
+                        'product_id' => $req->product_id,
+                        'quantity' => $req->quantity,
+                    ]
+                );
+
+            }
+
+            return redirect()->route('cart.index');
+
+        }else{
+            return redirect()->route('menu.index');
         }
 
-        // เพิ่มสินค้าลงในตะกร้า
-        $cart = session()->get('cart', []);
-
-        if (isset($cart[$productId])) {
-            $cart[$productId]['quantity'] += $quantity;
-        } else {
-            $cart[$productId] = [
-                "name" => $product->name,
-                "quantity" => $quantity,
-                "price" => $product->price,
-                "image" => $product->image
-            ];
-        }
-
-        session()->put('cart', $cart);
-
-        return redirect()->back()->with('success', 'Product added to cart.');
     }
-    // {
-    //     return view('frontend.cart.index');
-    // }
 
     public function showCart()
     {
@@ -69,4 +86,5 @@ class CustomerController extends Controller
     {
         return view('frontend.home.index');
     }
+
 }

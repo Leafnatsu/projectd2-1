@@ -25,7 +25,8 @@ Route::prefix('cart')->name('cart.')->middleware(['auth'])->group(function() {
     Route::get('/', [Front::class, 'cart'])->name('index');
 
     // Add Product to Cart
-    Route::post('add', [Front::class, 'addtocart'])->name('cart.add');
+    Route::post('add', [Front::class, 'addtocart'])->name('add');
+
 });
 
 

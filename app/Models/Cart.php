@@ -16,6 +16,7 @@ class Cart extends Model
         'created_at',
         'updated_at',
     ];
+
     public function products()
     {
         return $this->belongsTo(Products::class, 'product_id', 'id');
@@ -24,4 +25,5 @@ class Cart extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
 }
