@@ -16,12 +16,12 @@
                         <a href="{{ route('menu.index') }}" class="nav-link">รายการสินค้า</a>
                     </li>
                     @auth
-                    <li class="nav-item"><a href="" class="nav-link">
-                            ตระกร้าสินค้า
+                    <li class="nav-item"><a href="{{ route('cart.index') }}" class="nav-link">
+                            ตะกร้าสินค้า
                         </a></li>
                     @else
                     <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">
-                        ตระกร้าสินค้า
+                        ตะกร้าสินค้า
                         </a></li>
                     @endauth
                     @auth
@@ -32,12 +32,12 @@
                         @endif
                     @else
                         <a href="{{ route('login') }}">
-                            เข้าสู่ระบบ /
+                            เข้าสู่ระบบ |
                         </a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">
-                            / สมัครสมาชิก
+                            <a href="{{ route('register') }}" class="mx-1">
+                                สมัครสมาชิก
                             </a>
                         @endif
                     @endauth

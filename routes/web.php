@@ -25,7 +25,7 @@ Route::prefix('cart')->name('cart.')->middleware(['auth'])->group(function() {
     Route::get('/', [Front::class, 'cart'])->name('index');
 
     // Add Product to Cart
-
+    Route::post('add', [Front::class, 'addtocart'])->name('cart.add');
 });
 
 
@@ -105,7 +105,7 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'isAdmin'])-
 
 // Route::get('/', [App\Http\Controllers\IndexController::class, 'index'])->name('promote.index');
 // Route::get('/menus', [App\Http\Controllers\MenuController::class, 'menu'])->name('promote.menu');
-// Route::get('/cart', [App\Http\Controllers\CartController::class, 'cart'])->name('promote.cart');
+// Route::get('/carts', [App\Http\Controllers\CartController::class, 'cart'])->name('promote.cart');
 
 
 

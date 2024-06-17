@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id')->nullable();
             $table->bigInteger('product_id')->nullable();
+            $table->integer('quantity')->nullable();
             $table->timestamps();
         });
     }

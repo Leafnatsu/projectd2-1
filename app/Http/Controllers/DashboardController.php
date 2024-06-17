@@ -8,6 +8,7 @@ use RealRashid\SweetAlert\Facades\Alert As alert;
 
 use App\Models\Products;
 use App\Models\Category;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
@@ -335,6 +336,121 @@ class DashboardController extends Controller
         }else{
             alert()->error('แจ้งเตือน', 'ผิดพลาดไม่สามารถลบได้, โปรดลองใหม่อีกครั้ง');
             return redirect()->route('dashboard.category.index');
+        }
+
+    }
+    public function User(Request $req)
+    {
+
+        $user = User::query();
+
+        if(!empty($req->search))
+        {
+
+            $keyword = $req->search;
+
+            $user->where(function ($query) use ($keyword) {
+
+                $query->where('name', 'LIKE', '%' .$keyword. '%')
+                    ->orWhere('detail', 'LIKE', '%' .$keyword. '%')
+                ->orWhere('price', 'LIKE', '%' .$keyword. '%');
+
+            });
+
+        }
+
+        $result = $user->paginate(10);
+
+        return view(
+            'dashboard.user.index',
+            [
+                'user' => $result,
+            ]
+        );
+
+    }
+
+    public function UserEdit($id=null)
+    {
+
+        $user = User::find($id);
+
+        if(!empty($user->id))
+
+            return view(
+                'dashboard.user.edit',
+                [
+                    'user' => $user,
+                ]
+            );
+
+        else
+            return redirect()->route('dashboard.user.index');
+
+    }
+
+    public function UserUpdate(Request $req, $id)
+    {
+
+        $user = User::find($id);
+
+        if(empty($user->id))
+        {
+            alert()->error('แจ้งเตือน', 'ผิดพลาดไม่สามารถแก้ไขได้, โปรดลองใหม่อีกครั้ง');
+            return redirect()->route('dashboard.user.index');
+        }
+
+        $req->validate(
+            [
+                'product_name' => 'required',
+                'product_price' => 'required',
+                'product_category' => 'required',
+                'product_image' => 'nullable|image',
+                'product_detail' => 'required',
+            ],
+            [
+                'product_name.required' => '*โปรดกรอกชื่อสินค้า',
+                'product_price.required' => '*โปรดกรอกราคาสินค้า',
+                'product_category.required' => '*โปรดเลือกประเภทสินค้า',
+                'product_image.required' => '*โปรดเลือกรูปภาพสินค้า',
+                'product_image.image' => '*ไม่รองรับไฟล์, เลือกไฟล์นามสกุล jpg, png เท่านั้น',
+                'product_detail.required' => '*โปรดกรอกรายละเอียดสินค้า',
+            ]
+        );
+
+        $update = $user->update(
+            [
+                'name' => $req->product_name,
+                'price' => $req->product_price,
+                'category_id' => $req->product_category,
+                'detail' => $req->product_detail,
+            ]
+        );
+
+        if(!empty($update))
+        {
+            alert()->success('แจ้งเตือน','แก้ไขรายการสินค้าสำเร็จ');
+            return redirect()->route('dashboard.product.index');
+        }else{
+            alert()->error('แจ้งเตือน','แก้ไขการสินค้าไม่สำเร็จ');
+            return redirect()->route('dashboard.product.add');
+        }
+
+    }
+
+    public function UserDelete($id=null)
+    {
+
+        $product = Products::find($id);
+
+        if(!empty($product->id))
+        {
+            $product->delete();
+            alert()->success('แจ้งเตือน', 'ลบสำเร็จ');
+            return redirect()->route('dashboard.product.index');
+        }else{
+            alert()->error('แจ้งเตือน', 'ผิดพลาดไม่สามารถลบได้, โปรดลองใหม่อีกครั้ง');
+            return redirect()->route('dashboard.product.index');
         }
 
     }
