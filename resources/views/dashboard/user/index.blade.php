@@ -24,18 +24,8 @@
         <div class="container mt-5">
             <div class="float-start">
                 <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">
-                    จัดการ/</span> สินค้า
+                    จัดการ/</span> สมาชิก
                 </h4>
-            </div>
-
-            <div class="float-end">
-                <a href="{{ route('dashboard.product.add') }}" class="btn btn-primary">
-                    <span class="bx bx-add-to-queue"></span>
-                    เพิ่มสินค้า
-                </a>
-            </div>
-        </div>
-
         <!-- Content -->
         <div class="container-xxl flex-grow-1">
 
