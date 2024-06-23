@@ -32,7 +32,7 @@
             <!-- Basic Bootstrap Table -->
             <div class="float-center">
                 <div class="card">
-                    {{-- <h5 class="card-header">Table Product</h5> --}}
+                    {{-- <h5 class="card-header">Table user</h5> --}}
                     <div class="table-responsive text-nowrap">
                         <table class="table">
                             <thead>
@@ -47,42 +47,18 @@
                                 </tr>
                             </thead>
                             <tbody class="table-border-bottom-0">
-                                @if(!$products->isEmpty())
-                                    @foreach ($products as $key => $item)
+                                @if(!$user->isEmpty())
+                                    @foreach ($user as $key => $item)
                                         <tr>
-                                            <td>{{ $products->total() - ($products->firstItem() + $key) + 1 }}</td>
+                                            <td>{{ $user->total() - ($user->firstItem() + $key) + 1 }}</td>
                                             <td>{{ $item->name }}</td>
-                                                <td>
-                                                    @if(!empty($item->category->name))
-                                                        {{ $item->category->name }}
-                                                    @else
-                                                        <span class="text-danger">
-                                                            ไม่ระบุ
-                                                        </span>
-                                                    @endif
-                                                </td>
-                                            <td>
-                                                {{ number_format($item->price, 2) }}
-                                            </td>
-                                            <td>
-                                                <a href="{{ asset($item->image) }}"
-                                                    data-lightbox="{{ $item->id }}"
-                                                    data-title="{{ $item->name }}"
-                                                >
-                                                    <img
-                                                        src="{{ asset($item->image) }}"
-                                                        width="100px"
-                                                        height="80px"
-                                                        alt=""
-                                                    />
-                                                </a>
-                                            </td>
-                                            <td>
-                                                {{ $item->detail }}
-                                            </td>
+                                            <td>{{ $item->email }}</td>
+                                            <td>{{ $item->address }}</td>
+                                            <td>{{ $item->password }}</td>
+                                            <td>{{ $item->phone }}</td>
                                             <td>
 
-                                                <a href="{{ route('dashboard.product.edit', $item->id) }}" class="btn btn-warning btn-sm">
+                                                <a href="#" class="btn btn-warning btn-sm">
                                                     <i class='bx bxs-edit'></i>
                                                     แก้ไข
                                                 </a>
@@ -113,7 +89,7 @@
                                                                     ยกเลิก
                                                                 </button>
                                                                 <a
-                                                                    href="{{ route('dashboard.product.delete', $item->id) }}"
+                                                                    href="#"
                                                                     class="btn btn-danger"
                                                                 >
                                                                     ยืนยันการลบ
@@ -144,9 +120,9 @@
 
             {{-- <hr class="my-5"> --}}
 
-            @if(!$products->isEmpty())
+            @if(!$user->isEmpty())
                 <div class="d-flex mx-auto mt-4">
-                    {{ $products->links() }}
+                    {{ $user->links() }}
                 </div>
             @endif
             {{-- <div class="content-backdrop fade"></div> --}}

@@ -42,13 +42,12 @@ class CustomerController extends Controller
             $cart_checker = Cart::query()
                 ->where('user_id', $auth->id)
                 ->where('product_id', $req->product_id)
-                ->whereNull('order_id')
             ->first();
 
             if(!empty($cart_checker->id))
             {
 
-                $update_qty = Cart::find($cart_checker->id);
+                $update_qty = Car_cht::find($cartecker->id);
 
                 $update_qty->update(
                     [

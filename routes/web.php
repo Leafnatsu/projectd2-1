@@ -68,6 +68,22 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'isAdmin'])-
 
     });
 
+    Route::prefix('user')->name('user.')->group(function() {
+
+        // First Page Admin
+        Route::get('/', [Dashboard::class, 'User'])->name('index');
+
+        // Add Page
+        // Route::get('add', [Dashboard::class, 'CategoryAdd'])->name('add');
+        // Route::post('add', [Dashboard::class, 'CategoryInsert'])->name('insert');
+        // // Edit Page
+        // Route::get('edit/{id}', [Dashboard::class, 'CategoryEdit'])->name('edit');
+        // Route::post('edit/{id}', [Dashboard::class, 'CategoryUpdate'])->name('update');
+        // // Delete
+        // Route::get('delete/{id}', [Dashboard::class, 'CategoryDelete'])->name('delete');
+
+    });
+
     // Route::get('category', [Dashboard::class, 'category'])->name('category');
 
 });

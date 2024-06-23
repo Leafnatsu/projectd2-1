@@ -10,7 +10,7 @@
         </style>
 
         <div class="container h-100 py-5"
-            style="background-color: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 15px; color: black;">
+            style="background-color: rgba(255, 255, 255, 0.884); padding: 20px; border-radius: 15px; color: black;">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-10">
 
