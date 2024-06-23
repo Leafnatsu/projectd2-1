@@ -45,7 +45,7 @@
                                     <h5 class="mb-0" style="color: black;">99.00฿</h5>
                                 </div>
                                 <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                    <a href="#!" class="btn btn-sm btn-danger" onclick="removeItem(this)">ลบ</a>
+                                    <a href="#" class="btn btn-sm btn-danger" onclick="removeItem(this)">ลบ</a>
                                 </div>
                             </div>
                         </div>
