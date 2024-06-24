@@ -1,8 +1,20 @@
 @extends('layouts.promote')
 @section('content')
 
-    <section class="h-100" style="background-image: url(images/bg_1.jpg);">
+    <section class="mt-5 h-100" style="background-image: url(images/bg_1.jpg);">
 
+        <script>
+            function submitEditQty(id)
+            {
+                document.getElementById(id).submit();
+            }
+
+            function editSize(cart_id=null, size=null)
+            {
+                var url = "{{ route('cart.edit.size') }}" + "?cart_id=" + cart_id + "&size=" + size;
+                document.location.href = url;
+            }
+        </script>
         <style>
             input[type=number] {
                 color: black !important;
@@ -15,86 +27,122 @@
                 <div class="col-10">
 
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h3 class="fw-normal mb-0" style="color: black;">ตะกร้าสิ้นค้า</h3>
+                        <h3 class="fw-normal mb-0" style="color: black;">
+                            ตะกร้าสินค้า
+                        </h3>
                     </div>
-                    @if (!empty($item->cart))
+                    
+                    @if(!$carts->isEmpty())
 
-                        @foreach ($item->cart as $cart)
+                        @foreach($carts as $cart)
 
-                            <div class="card rounded-3 mb-4">
+                            <div class="card rounded-3 mb-4 mt-2">
                                 <div class="card-body p-4">
                                     <div class="row d-flex justify-content-between align-items-center">
                                         <div class="col-md-2 col-lg-2 col-xl-2">
-                                            @if(!empty($item->products->image))
-                                            <a href="{{ asset($product->image) }}" data-lightbox="{{ $product->id }}"
-                                                class="img"
-                                                style="background-image: url('{{ asset($product->image) }}');"></a>
-                                                @else
-                                                    <span class="text-danger">
-                                                        ไม่ระบุ
-                                                    </span>
-                                                @endif
+                                            <img src="{{ asset($cart->product->image) }}" class="img-fluid rounded-3">
                                         </div>
                                         <div class="col-md-3 col-lg-3 col-xl-3">
+
                                             <p class="lead fw-normal mb-2" style="color: black;">
-                                                @if(!empty($item->products->name))
-                                                    {{ $item->products->name }}
-                                                @else
-                                                    <span class="text-danger">
-                                                        ไม่ระบุ
-                                                    </span>
-                                                @endif
+                                                {{ $cart->product->name }}
                                             </p>
-                                            <p><span class="text-muted" style="color: black;">Size: </span>medium<span
-                                                    class="text-muted" style="color: black;"></span></p>
+
+                                            @if($cart->product->size == 1)
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <button 
+                                                        type="button"
+                                                        class="{{ !empty($cart->size) && ($cart->size == "S") ? 'btn btn-danger' : 'btn btn-primary' }}"
+                                                        onclick="editSize('{{ $cart->id }}', 'S')"
+                                                    >
+                                                        Small
+                                                    </button>
+                                                    <button 
+                                                        type="button" 
+                                                        class="{{ !empty($cart->size) && ($cart->size == "M") ? 'btn btn-danger' : 'btn btn-primary' }}"
+                                                        onclick="editSize('{{ $cart->id }}', 'M')"
+                                                    >
+                                                        Medium
+                                                    </button>
+                                                    <button 
+                                                        type="button" 
+                                                        class="{{ !empty($cart->size) && ($cart->size == "L") ? 'btn btn-danger' : 'btn btn-primary' }}"
+                                                        onclick="editSize('{{ $cart->id }}', 'L')"
+                                                    >
+                                                        Large
+                                                    </button>
+                                                </div>
+                                            @endif
+
                                         </div>
                                         <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
                                             <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
-                                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                onclick="">
                                                 <i class="fas fa-minus"></i>
                                             </button>
 
-                                            <input id="form1" min="0" name="quantity" value="2" type="number"
-                                                class="form-control form-control-sm" />
+                                            <form id="cartEditQtyId{{ $cart->id }}" action="{{ route('cart.edit.qty') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="cart_id" value="{{ $cart->id }}" />
+                                                <input type="hidden" name="product_id" value="{{ $cart->product->id }}" />
+                                                <input 
+                                                    min="0" 
+                                                    name="quantity" 
+                                                    value="{{ $cart->quantity }}" 
+                                                    type="number"
+                                                    class="form-control form-control-sm"
+                                                    onchange="submitEditQty('cartEditQtyId{{ $cart->id }}');"
+                                                />
+                                            </form>
 
                                             <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
-                                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                onclick="">
                                                 <i class="fas fa-plus"></i>
                                             </button>
                                         </div>
                                         <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                                             <h5 class="mb-0" style="color: black;">
-                                                @if(!empty($item->product->price))
-                                                    {{ $item->product->price }}
-                                                @else
-                                                    <span class="text-danger">
-                                                        ไม่ระบุ
-                                                    </span>
-                                                @endif
+                                                {{ number_format($cart->price, 2) }}฿
                                             </h5>
                                         </div>
+
                                         <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                            <a href="#!" class="btn btn-sm btn-danger" onclick="removeItem(this)">ลบ</a>
+                                            <form
+                                                action="{{ route('cart.delete', $cart->id) }}"
+                                                method="get"
+                                            >
+                                                @csrf
+                                                <button type="submit" class="btn btn-sm btn-danger">
+                                                    ลบ
+                                                </button>
+                                            </form>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
-                    @else
-                        <tr>
-                            <td colspan="7" class="text-center text-danger fw-bolder h5">
-                                <span class="bx bx-block"></span>
-                                ไม่มีข้อมูล
-                            </td>
-                        </tr>
-                    @endif
-                    <div class="card">
-                        <div class="card-body">
-                            <button type="button" class="btn btn-warning btn-block btn-lg" style="color: black;">
 
-                            </button>
+                        @endforeach
+
+                    @else
+
+                        <div class="mx-5 h1 text-center">
+                            <span class="badge bg-danger text-light">
+                                ไม่มีรายการ
+                            </span>
                         </div>
-                    </div>
+
+                    @endif
+                    
+                    @if(!$carts->isEmpty())
+                        <div class="card">
+                            <div class="card-body">
+                                <button type="button" class="btn btn-warning btn-block btn-lg" style="color: black;">
+                                    สั่งซื้อสินค้า
+                                </button>
+                            </div>
+                        </div>
+                    @endif
 
                 </div>
             </div>

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,7 +12,7 @@ class Products extends Model
 {
 
     use HasFactory;
-    use SoftDeletes;
+    // use SoftDeletes;
 
     protected $table = 'products';
 
@@ -20,10 +22,10 @@ class Products extends Model
 
         'created_at',
         'updated_at',
-        'deleted_at',
+
     ];
 
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
@@ -32,5 +34,5 @@ class Products extends Model
     {
         return $this->hasMany(Cart::class, 'product_id');
     }
-}
 
+}

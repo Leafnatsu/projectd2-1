@@ -1,21 +1,3 @@
-            {{-- <tbody class="table-border-bottom-0">
-              @foreach ($user as $item)
-              <tr>
-              <td>{{ $user->firstItem()+$loop->index}}</td>
-              <td>{{ $item->username }}</td>
-              <td>{{ $item->email }}</td>
-              <td>{{ $item->address }}</td>
-              <td>{{ $item->password }}</td>
-              <td>{{ $item->phone }}</td>
-              <td>{{ $item->created_at }}</td>
-              <td>{{ $item->updated_at }}</td>
-              <td>
-                <a href="{{ route('about.edit',$item->id) }}"><i class='bx bxs-edit'>Edit</i></a>
-                <a href="{{ route('about.delete',$item->id) }}"><i class='bx bx-trash'>Delete</i></a>
-              </td>
-              </tr>
-              @endforeach
-            </tbody> --}}
 @extends('layouts.admin')
 @section('search.target', route("dashboard.user.index"))
 @section('content')
@@ -58,9 +40,9 @@
                                             <td>{{ $item->phone }}</td>
                                             <td>
 
-                                                <a href="#" class="btn btn-warning btn-sm">
-                                                    <i class='bx bxs-edit'></i>
-                                                    แก้ไข
+                                                <a href="#" class="btn btn-success btn-sm">
+                                                    <i class='bx bxs-check-circle'></i>
+                                                    เปิดการใช้งาน
                                                 </a>
 
                                                 <button
@@ -68,8 +50,8 @@
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#confrimDeleteId{{ $item->id }}"
                                                 >
-                                                    <i class='bx bx-trash'></i>
-                                                    ลบ
+                                                    <i class='bx bx-x-circle'></i>
+                                                    ปิดการใช้งาน
                                                 </button>
 
                                                 <div class="modal fade" id="confrimDeleteId{{ $item->id }}" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">

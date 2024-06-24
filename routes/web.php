@@ -27,6 +27,13 @@ Route::prefix('cart')->name('cart.')->middleware(['auth'])->group(function() {
     // Add Product to Cart
     Route::post('add', [Front::class, 'addtocart'])->name('add');
 
+    // Edit
+    Route::post('edit/qty', [Front::class, 'cartEditQTY'])->name('edit.qty');
+    Route::get('edit/size', [Front::class, 'cartEditSize'])->name('edit.size');
+
+    // Delete
+    Route::get('delete/{id}', [Front::class, 'cartDelete'])->name('delete');
+
 });
 
 

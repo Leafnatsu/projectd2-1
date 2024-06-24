@@ -26,19 +26,21 @@
                     @endauth
                     @auth
                         @if(Auth::user()->isAdmin == 1)
-                            <a href="{{ url('/dashboard') }}">
+                        <li class="nav-item">
+                            <a href="{{ route('dashboard.index') }}">
                                 สำหรับผู้ดูแลระบบ
                             </a>
+                        </li>
                         @endif
                     @else
-                        <a href="{{ route('login') }}">
+                    <li class="nav-item"><a href="{{ route('login') }}">
                             เข้าสู่ระบบ |
-                        </a>
+                        </a></li>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="mx-1">
+                        <li class="nav-item"><a href="{{ route('register') }}" class="mx-1">
                                 สมัครสมาชิก
-                            </a>
+                            </a></li>
                         @endif
                     @endauth
                 </ul>
