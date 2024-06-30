@@ -41,30 +41,30 @@
                     @if (!empty($item->product))
 
                         @foreach ($item->product as $product)
-                            <div class="col-lg-4 d-flex ftco-animate">
+                        <div class="col-lg-4 d-flex ftco-animate mx-auto">
                                 <div class="services-wrap d-flex">
                                     <a href="{{ asset($product->image) }}" data-lightbox="{{ $product->id }}"
-                                        data-title="{{ $product->name }}" class="img"
+                                        data-title="{{ $product->name }}" class="img text-dark border border-start-0 border-5"
                                         style="background-image: url('{{ asset($product->image) }}');"></a>
                                     <div class="text p-4">
-                                        <h3>
+                                        <h2 class="text-dark">
                                             {{ $product->name }}
-                                        </h3>
-                                        <p>{{ $product->detail }}</p>
+                                        </h2>
+                                        <p class="text-dark h5">{{ $product->detail }}</p>
                                         <p class="price">
-                                            <span>{{ number_format($product->price, 2) }}฿</span>
-                                            <form action="{{ route('cart.add') }}" method="post" class="mt-2">
+                                            <span class="text-dark h5">{{ number_format($product->price, 2) }}฿</span>
+                                            <form action="{{ route('cart.add') }}" method="post" class="mt-2 text-dark">
                                                 @csrf
                                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                                @if ($item->size == 1)
-                                                    <select name="size" class="form-control mb-2">
+                                                @if ($product->size == 1)
+                                                    <select name="size" class="form-control mb-2 text-dark" style="color:black;">
                                                         <option value="S" class="text-dark">ขนาด S</option>
                                                         <option value="M" class="text-dark">ขนาด M</option>
                                                         <option value="L" class="text-dark">ขนาด L</option>
                                                     </select>
                                                 @endif
-                                                <input type="number" name="quantity" value="1" min="1" class="form-control mb-2">
-                                                <button type="submit" class="btn btn-white btn-outline-white">
+                                                <input type="number" name="quantity" value="1" min="1" class="form-control mb-2 text-dark">
+                                                <button type="submit" class="btn btn-dark btn-outline-white btn-lg">
                                                     สั่งอาหาร
                                                 </button>
                                             </form>

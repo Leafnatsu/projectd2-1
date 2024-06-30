@@ -12,7 +12,7 @@ class IndexController extends Controller
 
     public function index()
     {
-        return view('promote.index');
+        return view('frontend.order.index');
     }
 
 }

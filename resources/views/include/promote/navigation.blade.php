@@ -19,6 +19,9 @@
                     <li class="nav-item"><a href="{{ route('cart.index') }}" class="nav-link">
                             ตะกร้าสินค้า
                         </a></li>
+                    <li class="nav-item"><a href="{{ route('order.index') }}" class="nav-link">
+                            คำสั่งซื้อ
+                        </a></li>
                     @else
                     <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">
                         ตะกร้าสินค้า

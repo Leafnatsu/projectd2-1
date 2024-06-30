@@ -1,10 +1,10 @@
 @extends('layouts.promote')
 @section('content')
 
-    <section class="mt-5 h-100" style="background-image: url(images/bg_1.jpg);">
+    <section class="mt-5 mb-5 h-100" style="background-image: url(images/bg_1.jpg);">
 
         <script>
-            function submitEditQty(id)
+            function submitFrom(id)
             {
                 document.getElementById(id).submit();
             }
@@ -21,8 +21,10 @@
             }
         </style>
 
-        <div class="container h-100 py-5"
-            style="background-color: rgba(255, 255, 255, 0.884); padding: 20px; border-radius: 15px; color: black;">
+        <div 
+            class="container h-100 py-5"
+            style="background-color: rgba(255, 255, 255, 0.884); padding: 20px; border-radius: 15px; color: black;"
+        >
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-10">
 
@@ -49,29 +51,42 @@
                                             </p>
 
                                             @if($cart->product->size == 1)
+
                                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <button 
+
+                                                    {{-- <button 
                                                         type="button"
                                                         class="{{ !empty($cart->size) && ($cart->size == "S") ? 'btn btn-danger' : 'btn btn-primary' }}"
                                                         onclick="editSize('{{ $cart->id }}', 'S')"
                                                     >
                                                         Small
-                                                    </button>
-                                                    <button 
-                                                        type="button" 
-                                                        class="{{ !empty($cart->size) && ($cart->size == "M") ? 'btn btn-danger' : 'btn btn-primary' }}"
-                                                        onclick="editSize('{{ $cart->id }}', 'M')"
+                                                    </button> --}}
+
+                                                    <form 
+                                                        id="cartEditSizeId{{ $cart->id }}"
+                                                        class="text-dark"
+                                                        action="{{ route('cart.edit.size') }}" 
+                                                        method="get"
                                                     >
-                                                        Medium
-                                                    </button>
-                                                    <button 
-                                                        type="button" 
-                                                        class="{{ !empty($cart->size) && ($cart->size == "L") ? 'btn btn-danger' : 'btn btn-primary' }}"
-                                                        onclick="editSize('{{ $cart->id }}', 'L')"
-                                                    >
-                                                        Large
-                                                    </button>
+                                                        <input type="hidden" name="cart_id" value="{{ $cart->id }}" />
+                                                        <select
+                                                            name="size"
+                                                            class="form-select text-dark"
+                                                            onchange="submitFrom('cartEditSizeId{{ $cart->id }}');"
+                                                        >
+                                                            <option value="">
+                                                                --เลือกขนาดถาด--
+                                                            </option>
+                                                            @foreach($size_cart as $i)
+                                                                <option value="{{ $i->size }}" class="text-dark" {{ $cart->size == $i->size ? 'selected' : null }}>
+                                                                    {{ $i->name }} +{{ number_format($i->price, 2) }}฿
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </form>
+
                                                 </div>
+
                                             @endif
 
                                         </div>
@@ -91,7 +106,7 @@
                                                     value="{{ $cart->quantity }}" 
                                                     type="number"
                                                     class="form-control form-control-sm"
-                                                    onchange="submitEditQty('cartEditQtyId{{ $cart->id }}');"
+                                                    onchange="submitFrom('cartEditQtyId{{ $cart->id }}');"
                                                 />
                                             </form>
 
@@ -137,9 +152,11 @@
                     @if(!$carts->isEmpty())
                         <div class="card">
                             <div class="card-body">
-                                <button type="button" class="btn btn-warning btn-block btn-lg" style="color: black;">
-                                    สั่งซื้อสินค้า
-                                </button>
+                                <a href="{{ route('cart.checkout') }}" class="btn btn-warning btn-block btn-lg" style="color: black;">
+                                    <h4>
+                                        สั่งซื้อสินค้า
+                                    </h4>
+                                </a>
                             </div>
                         </div>
                     @endif

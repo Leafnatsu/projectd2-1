@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,6 +20,16 @@ class Cart extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function GetSize(): BelongsTo
+    {
+        return $this->belongsTo(Size::class, 'size', 'size');
+    }
+
+    public function products() : HasMany
+    {
+        return $this->hasMany(Products::class, 'product_id', 'id');
+    }
 
     public function product()
     {

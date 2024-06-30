@@ -34,8 +34,23 @@ Route::prefix('cart')->name('cart.')->middleware(['auth'])->group(function() {
     // Delete
     Route::get('delete/{id}', [Front::class, 'cartDelete'])->name('delete');
 
+    // Cart Checkout
+    Route::get('checkout', [Front::class, 'checkout'])->name('checkout'); 
+    
+    
 });
 
+// order
+Route::prefix('order')->name('order.')->group(function() {
+    
+    // Root of Dashboard
+    Route::get('/', [Front::class, 'order'])->name('index');
+    // Confirm Payment
+    Route::get('ConfirmPayment',[Front::class, 'ConfirmPayment'])->name('confirm');
+    // Cancel
+    Route::get('CancelPayment',[Front::class, 'CancelPayment'])->name('cancel');
+    
+});
 
 // BackEnd
 Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'isAdmin'])->group(function() {
@@ -127,7 +142,7 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'isAdmin'])-
 
 
 
-// Route::get('/', [App\Http\Controllers\IndexController::class, 'index'])->name('promote.index');
+// Route::get('/order', [App\Http\Controllers\IndexController::class, 'index'])->name('promote.index');
 // Route::get('/menus', [App\Http\Controllers\MenuController::class, 'menu'])->name('promote.menu');
 // Route::get('/carts', [App\Http\Controllers\CartController::class, 'cart'])->name('promote.cart');
 
