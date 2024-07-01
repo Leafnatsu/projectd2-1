@@ -370,10 +370,11 @@ class CustomerController extends Controller
     {
 
         if(
-            empty($req->order_id)
+            empty($req->order_id) &&
+            empty($req->confirmSlip)
         )
         {
-            return redirect()->route('menu.index');
+            return redirect()->route('order.index');
         }
 
         $order = Orders::find($req->order_id);

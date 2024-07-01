@@ -111,6 +111,7 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'isAdmin'])-
     Route::prefix('order')->name('order.')->group(function() {
 
         Route::get('/', [Dashboard::class, 'Order'])->name('index');
+        Route::post('UpdateStatus',[Dashboard::class, 'UpdateStatus'])->name('update');
 
     });
     // Route::get('category', [Dashboard::class, 'category'])->name('category');

@@ -25,6 +25,7 @@
                                     <th>ราคารวม</th>
                                     <th>วันที่สั่งซื้อ</th>
                                     <th>สถานะ</th>
+                                    <th>สลิปการโอนเงิน</th>
                                     <th>รายละเอียดคำสั่งซื้อ</th>
                                 </tr>
                             </thead>
@@ -47,9 +48,9 @@
                                             <td>{{ $item->created_at->thaidate('j F Y, H:i'); }}</td>
                                             <td>
                                                 @if($item->status >= 1)
-                                                    @if($item->status == 2)
-                                                        <span class="badge rounded-pill bg-danger text-white">
-                                                            ยกเลิกรายการ
+                                                @if($item->status == 2)
+                                                <span class="badge rounded-pill bg-danger text-white">
+                                                    ยกเลิกรายการ
                                                         </span> 
                                                     @else
                                                         <span class="badge rounded-pill bg-success text-white">
@@ -63,8 +64,27 @@
                                                 @endif
                                             </td>
                                             <td>
+                                            @if(!empty($item->approve_payment))
+                                                <a href="{{ asset($item->approve_payment) }}"
+                                                    data-lightbox="{{ $item->id }}"
+                                                    data-title="{{ $item->name }}"
+                                                >
+                                                    <img
+                                                        src="{{ asset($item->approve_payment) }}"
+                                                        width="100px"
+                                                        height="80px"
+                                                        alt=""
+                                                    />
+                                                </a>
+                                            @else
+                                                <span class="badge text-danger">
+                                                    Nopic
+                                                </span>
+                                            @endif
+                                            </td>
+                                            <td>
                                                 <button
-                                                class="btn btn-danger btn-sm"
+                                                class="btn btn-primary btn-sm"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#discriptionId{{ $item->id }}"
                                             >
@@ -83,49 +103,54 @@
                                                         </div>
                                                         @foreach($item->carts as $cart)
 
-                                                        <div class="col-12 mb-2 mt-2">
-                                                            <div class="float-left mx-3">
-                                                                <img 
-                                                                    class="img-fluid rounded mx-2" 
-                                                                    width="64px"
-                                                                    height="64px"
-                                                                    src="{{ asset($cart->product->image) }}" 
-                                                                    alt="product image"
-                                                                />
-                                                                {{ $cart->product->name }}   
-                                                                <small class="text-dark">
-                                                                    (ราคาต่อชิ้น {{ !empty($cart->size) ? number_format($cart->product->price + $cart->GetSize->price, 2) : number_format($cart->price, 2) }}฿)
-                                                                    {{ !empty($cart->size) ? '(ขนาดถาด '.$cart->GetSize->name.')' : null }}
-                                                                </small>
-            
-                                                                <span class="mx-2">
-            
-                                                                </span>
-            
+                                                            <div class="col-12 mb-2 mt-2">
+                                                                <div class="float-left mx-3">
+                                                                    <img 
+                                                                        class="img-fluid rounded mx-2" 
+                                                                        width="64px"
+                                                                        height="64px"
+                                                                        src="{{ asset($cart->product->image) }}" 
+                                                                        alt="product image"
+                                                                    />
+                                                                    {{ $cart->product->name }}   
+                                                                    <small class="text-dark">
+                                                                        (ราคาต่อชิ้น {{ !empty($cart->size) ? number_format($cart->product->price + $cart->GetSize->price, 2) : number_format($cart->price, 2) }}฿)
+                                                                        {{ !empty($cart->size) ? '(ขนาดถาด '.$cart->GetSize->name.')' : null }}
+                                                                    </small>
+                
+                                                                    <span class="mx-2">
+                
+                                                                    </span>
+                
+                                                                </div>
+                                                                <div class="float-right mx-3">
+                                                                    ชิ้น: {{ $cart->quantity }}
+                                                                </div>
                                                             </div>
-                                                            <div class="float-right mx-3">
-                                                                ชิ้น: {{ $cart->quantity }}
-                                                            </div>
-                                                        </div>
             
-                                                    @endforeach
+                                                        @endforeach
                                                                                                             
-                                                    <small class="text-dark mx-3">
-                                                        <div class="float-right mx-3 h6">
-                                                            ยอดรวมการสั่งซื้อ <span class="font-weight-bold text-dark">฿{{ number_format($item->total_price, 2) }}</span>
-                                                        </div>
-                                                    </small>
-                                                        <div class="modal-footer text-center">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                                ยกเลิก
-                                                            </button>
-                                                            <a
-                                                                href="{{ route('dashboard.product.delete', $item->id) }}"
-                                                                class="btn btn-danger"
-                                                            >
-                                                                ยืนยันการลบ
-                                                            </a>
-                                                        </div>
+                                                        <small class="text-dark mx-3">
+                                                            <div class="float-right mx-3 h6">
+                                                                ยอดรวมการสั่งซื้อ <span class="font-weight-bold text-dark">฿{{ number_format($item->total_price, 2) }}</span>
+                                                            </div>
+                                                        </small>
+                                                        @if(
+                                                            $item->status == 0
+                                                        )
+                                                            <div class="modal-footer text-center">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                                    ยกเลิก
+                                                                </button>
+                                                                <a
+                                                                    href="{{ route('dashboard.order.update', $item->id) }}"
+                                                                    class="btn btn-success"
+                                                                >
+                                                                    อณุมิตคำสั่งซื้อ
+                                                                </a>
+                                                            </div>
+                                                        @else
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>

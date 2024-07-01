@@ -418,6 +418,39 @@ class DashboardController extends Controller
         return redirect()->route('dashboard.user.index');
     }
 
+    public function UpdateStatus(Request $req)
+    {
+
+        if(
+            empty($req->order_id) &&
+            empty($req->confirmSlip)
+        )
+        {
+            return redirect()->route('dashboard.order.index');
+        }
+
+        $order = Order::find($req->order_id);
+
+        if(!empty($order->id))
+        {
+
+            $update = $order->update(["status" => 1]);
+
+            if($update)
+            {
+                alert()->success('อณุมัติการทำรายการสำเร็จ');
+                return redirect()->route('dashboard.order.index');
+            }else{
+                alert('อณุมัติการทำรายการไม่สำเร็จ');
+                return redirect()->route('dashboard.order.index');
+            }
+
+        }else{
+            return redirect()->route('dashboard.order.index');
+        }
+
+    }
+
     // public function UserEdit($id=null)
     // {
 
