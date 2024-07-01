@@ -46,7 +46,7 @@ Route::prefix('order')->name('order.')->group(function() {
     // Root of Dashboard
     Route::get('/', [Front::class, 'order'])->name('index');
     // Confirm Payment
-    Route::get('ConfirmPayment',[Front::class, 'ConfirmPayment'])->name('confirm');
+    Route::post('ConfirmPayment',[Front::class, 'ConfirmPayment'])->name('confirm');
     // Cancel
     Route::get('CancelPayment',[Front::class, 'CancelPayment'])->name('cancel');
     
@@ -94,7 +94,8 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'isAdmin'])-
 
         // First Page Admin
         Route::get('/', [Dashboard::class, 'User'])->name('index');
-
+        Route::get('/enable/{id}', [Dashboard::class, 'enable'])->name('enable');
+        Route::get('/disable/{id}', [Dashboard::class, 'disable'])->name('disable');
         // Add Page
         // Route::get('add', [Dashboard::class, 'CategoryAdd'])->name('add');
         // Route::post('add', [Dashboard::class, 'CategoryInsert'])->name('insert');
@@ -106,6 +107,12 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'isAdmin'])-
 
     });
 
+
+    Route::prefix('order')->name('order.')->group(function() {
+
+        Route::get('/', [Dashboard::class, 'Order'])->name('index');
+
+    });
     // Route::get('category', [Dashboard::class, 'category'])->name('category');
 
 });

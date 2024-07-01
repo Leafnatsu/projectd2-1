@@ -39,48 +39,15 @@
                                             <td>{{ $item->password }}</td>
                                             <td>{{ $item->phone }}</td>
                                             <td>
-
-                                                <a href="#" class="btn btn-success btn-sm">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    เปิดการใช้งาน
+                                            @if ($item->status)
+                                                <a href="{{ route('dashboard.user.disable', $item->id) }}" class="btn btn-danger btn-sm">
+                                                    <i class='bx bx-x-circle'></i> ปิดการใช้งาน
                                                 </a>
-
-                                                <button
-                                                    class="btn btn-danger btn-sm"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#confrimDeleteId{{ $item->id }}"
-                                                >
-                                                    <i class='bx bx-x-circle'></i>
-                                                    ปิดการใช้งาน
-                                                </button>
-
-                                                <div class="modal fade" id="confrimDeleteId{{ $item->id }}" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">
-                                                                    ยืนยันการลบ
-                                                                </h5>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                คุณต้องการลบสินค้า "{{ $item->name }}" หรือไม่ ?
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                                    ยกเลิก
-                                                                </button>
-                                                                <a
-                                                                    href="#"
-                                                                    class="btn btn-danger"
-                                                                >
-                                                                    ยืนยันการลบ
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
+                                            @else
+                                                <a href="{{ route('dashboard.user.enable', $item->id) }}" class="btn btn-success btn-sm">
+                                                    <i class='bx bxs-check-circle'></i> เปิดการใช้งาน
+                                                </a>
+                                            @endif
                                             </td>
                                         </tr>
                                     @endforeach

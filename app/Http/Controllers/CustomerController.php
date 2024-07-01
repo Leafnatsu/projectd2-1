@@ -355,7 +355,7 @@ class CustomerController extends Controller
                 alert()->success('แจ้งชำระเงินสำเร็จ, โปรดรอการตรวจสอบเอกสาร และ ยืนยันข้อมูลการชำระเงิน');
                 return redirect()->route('order.index');
             }else{
-                toast('แจ้งชำระเงินไม่สำเร็จ','error');
+                toast('แจ้งชำระเงินไม่สำเร็จ','error'); 
                 return redirect()->route('order.index');
             }
 
@@ -373,7 +373,7 @@ class CustomerController extends Controller
             empty($req->order_id)
         )
         {
-            return redirect()->route('order.index');
+            return redirect()->route('menu.index');
         }
 
         $order = Orders::find($req->order_id);
@@ -393,7 +393,6 @@ class CustomerController extends Controller
             }
 
         }else{
-
             return redirect()->route('order.index');
         }
 

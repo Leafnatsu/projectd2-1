@@ -20,9 +20,22 @@
                             <div class="card-body">
                                 <div class="card-title text-dark fw-bolder h4 mx-3">
                                     หมายเลขคำสั่งซื้อ {{ $i->order_code }}
-                                    <span class="badge rounded-pill {{ $i->status == 1 ? 'bg-success' : 'bg-secondary' }} text-light">
-                                        {{ $i->status == 1 ? 'ชำระเงินแล้ว' : 'รอชำระเงิน' }}
-                                    </span>
+
+                                    @if($i->status >= 1)
+                                        @if($i->status == 2)
+                                            <span class="badge rounded-pill bg-danger text-light">
+                                                ยกเลิกรายการ
+                                            </span> 
+                                        @else
+                                            <span class="badge rounded-pill bg-success text-light">
+                                                ชำระเงินแล้ว
+                                            </span> 
+                                        @endif
+                                    @else
+                                        <span class="badge rounded-pill bg-secondary text-light">
+                                            รอชำระเงิน
+                                        </span> 
+                                    @endif
                                 </div>
                                 <small class="text-dark mx-3 h5">
                                     วันที่สั่งซื้อ : {{ $i->created_at->thaidate('j F Y, H:i'); }}
@@ -60,18 +73,11 @@
                                                 </div>
                                             </div>
                                             
-                                            @php
-                                                $total_qty+=$cart->quantity;
-                                            @endphp
-
                                         @endforeach
                                     </div>
 
                                 <hr class="mx-3" />
                                 <small class="text-dark mx-3">
-                                    <div class="float-left mx-3">
-                                        {{ number_format($total_qty) }} รายการสั่งซื้อ
-                                    </div>
                                     <div class="float-right mx-3 h6">
                                         ยอดรวมการสั่งซื้อ <span class="font-weight-bold text-dark">฿{{ number_format($i->total_price, 2) }}</span>
                                     </div>
@@ -121,7 +127,7 @@
                                                 ปิดหน้าต่าง
                                             </button>
                                             <a
-                                                href="{{route('order.confirm')}}"
+                                                href="{{route('order.cancel')}}"
                                                 class="btn btn-danger"
                                             >
                                                 ยืนยันการยกเลิกรายการ

@@ -9,6 +9,7 @@ use RealRashid\SweetAlert\Facades\Alert As alert;
 use App\Models\Products;
 use App\Models\Category;
 use App\Models\User;
+use App\Models\Order;
 
 class DashboardController extends Controller
 {
@@ -366,6 +367,55 @@ class DashboardController extends Controller
             ]
         );
 
+    }
+
+    public function Order(Request $req)
+    {
+
+        $order = Order::query();
+
+        if(!empty($req->search))
+        {
+
+            $keyword = $req->search;
+
+            $order->where(function ($query) use ($keyword) {
+
+                $query->where('name', 'LIKE', '%' .$keyword. '%');
+
+            });
+
+        }
+
+        $result = $order->paginate(10);
+
+        return view(
+            'dashboard.order.index',
+            [
+                'order' => $result,
+            ]
+        );
+
+    }
+
+    public function enable($id)
+    {
+        $user = User::find($id);
+        if ($user) {
+            $user->status = true;
+            $user->save();
+        }
+        return redirect()->route('dashboard.user.index');
+    }
+
+    public function disable($id)
+    {
+        $user = User::find($id);
+        if ($user) {
+            $user->status = false;
+            $user->save();
+        }
+        return redirect()->route('dashboard.user.index');
     }
 
     // public function UserEdit($id=null)

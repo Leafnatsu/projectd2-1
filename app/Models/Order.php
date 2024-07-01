@@ -16,7 +16,7 @@ class Order extends Model
 
     protected $table = 'orders';
 
-    // protected $fillable = ['name','detail','price','image'];
+    protected $fillable = ['status'];
 
     protected $guarded = [
 
@@ -30,4 +30,8 @@ class Order extends Model
         return $this->hasMany(Cart::class, 'order_id', 'id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

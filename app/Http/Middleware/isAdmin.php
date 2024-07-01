@@ -26,7 +26,7 @@ class isAdmin
             return $next($request);
         }else{
             // alert()->info('แจ้งเตือน', 'คุณไม่มีสิทธิเข้าหน้านี้');
-            return redirect()->route('default');
+            return redirect()->route('home');
         }
 
     }

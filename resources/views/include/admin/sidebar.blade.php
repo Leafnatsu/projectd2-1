@@ -46,7 +46,7 @@
             </a>
         </li>
         <li class="menu-item">
-            <a href="#" class="menu-link">
+            <a href="{{ route('dashboard.order.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cart-alt"></i>
                 <div data-i18n="Basic">รายการสั่งของ</div>
             </a>
