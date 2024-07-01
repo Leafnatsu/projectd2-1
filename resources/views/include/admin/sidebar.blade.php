@@ -46,6 +46,12 @@
             </a>
         </li>
         <li class="menu-item">
+            <a href="{{ route('dashboard.size.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-ruler"></i>
+                <div data-i18n="Basic">ขนาดของสินค้า</div>
+            </a>
+        </li>
+        <li class="menu-item">
             <a href="{{ route('dashboard.order.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cart-alt"></i>
                 <div data-i18n="Basic">รายการสั่งของ</div>

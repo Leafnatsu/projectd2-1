@@ -1,19 +1,19 @@
 @extends('layouts.admin')
-@section('search.target', route("dashboard.category.index"))
+@section('search.target', route("dashboard.size.index"))
 @section('content')
     <div class="content-wrapper">
 
         <div class="container mt-5">
             <div class="float-start">
                 <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">
-                    จัดการ/</span> ประเภทสินค้า
+                    จัดการ/</span> ขนาดของสินค้า
                 </h4>
             </div>
 
             <div class="float-end">
-                <a href="{{ route('dashboard.category.add') }}" class="btn btn-primary">
+                <a href="{{ route('dashboard.size.add') }}" class="btn btn-primary">
                     <span class="bx bx-add-to-queue"></span>
-                    เพิ่มประเภทสินค้า
+                    เพิ่มขนาดของสินค้า
                 </a>
             </div>
         </div>
@@ -30,19 +30,22 @@
                             <thead>
                                 <tr>
                                     <th class="">ลำดับ</th>
-                                    <th>ชื่อประเภทสินค้า</th>
+                                    <th>ชื่อขนาดของสินค้า</th>
+                                    <th>ขนาดของสินค้า</th>
+                                    <th>ราคาของสินค้า</th>
                                     <th>จัดการ</th>
                                 </tr>
                             </thead>
                             <tbody class="table-border-bottom-0">
-                                @if(!$category->isEmpty())
-                                    @foreach ($category as $key => $item)
+                                @if(!$size->isEmpty())
+                                    @foreach ($size as $key => $item)
                                         <tr>
-                                            <td>{{ $category->total() - ($category->firstItem() + $key) + 1 }}</td>
+                                            <td>{{ $size->total() - ($size->firstItem() + $key) + 1 }}</td>
                                             <td>{{ $item->name }}</td>
+                                            <td>{{ $item->size }}</td>
+                                            <td>{{ $item->price }}</td>
                                             <td>
-
-                                                <a href="{{ route('dashboard.category.edit', $item->id) }}" class="btn btn-warning btn-sm">
+                                                <a href="{{ route('dashboard.size.edit', $item->id) }}" class="btn btn-warning btn-sm">
                                                     <i class='bx bxs-edit'></i>
                                                     แก้ไข
                                                 </a>
@@ -66,14 +69,14 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                คุณต้องการลบสินค้าประเภท "{{ $item->name }}" หรือไม่ ?
+                                                                คุณต้องการลบขนาด "{{ $item->name }}" หรือไม่ ?
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                                                     ยกเลิก
                                                                 </button>
                                                                 <a
-                                                                    href="{{ route('dashboard.category.delete', $item->id) }}"
+                                                                    href="{{ route('dashboard.size.delete', $item->id) }}"
                                                                     class="btn btn-danger"
                                                                 >
                                                                     ยืนยันการลบ
@@ -104,9 +107,9 @@
 
             {{-- <hr class="my-5"> --}}
 
-            @if(!$category->isEmpty())
+            @if(!$size->isEmpty())
                 <div class="d-flex mx-auto mt-4">
-                    {{ $category->links() }}
+                    {{ $size->links() }}
                 </div>
             @endif
             {{-- <div class="content-backdrop fade"></div> --}}

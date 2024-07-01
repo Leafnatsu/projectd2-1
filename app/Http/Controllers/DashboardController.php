@@ -10,6 +10,7 @@ use App\Models\Products;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Size;
 
 class DashboardController extends Controller
 {
@@ -447,6 +448,157 @@ class DashboardController extends Controller
 
         }else{
             return redirect()->route('dashboard.order.index');
+        }
+
+    }
+
+    public function Size(Request $req)
+    {
+
+        $size = Size::query();
+
+        if(!empty($req->search))
+        {
+
+            $keyword = $req->search;
+
+            $size->where(function ($query) use ($keyword) {
+
+                $query->where('name', 'LIKE', '%' .$keyword. '%')
+                ->orWhere('size', 'LIKE', '%' .$keyword. '%');
+            });
+
+        }
+
+        $result = $size->paginate(10);
+
+        return view(
+            'dashboard.size.index',
+            [
+                'size' => $result,
+            ]
+        );
+
+    }
+
+    public function SizeAdd()
+    {
+        return view(
+            'dashboard.size.add',
+        );
+    }
+
+    public function SizeInsert(Request $req)
+    {
+
+        $req->validate(
+            [
+                'size_name' => 'required',
+                'size_size' => 'required',
+                'size_price' => 'required',
+            ],
+            [
+                'size_name.required' => '*โปรดกรอกชื่อขนาดของสินค้า',
+                'size_size.required' => '*โปรดกรอกขนาดของสินค้า',
+                'size_price.required' => '*โปรดกรอกราคาขนาดสินค้า',
+            ]
+        );
+
+        $create = Size::create(
+            [
+                'name' => $req->size_name,
+                'size' => $req->size_size,
+                'price' => $req->size_price,
+            ]
+        );
+
+        if(!empty($create))
+        {
+            alert()->success('แจ้งเตือน','เพิ่มขนาดของสินค้าสำเร็จ');
+            return redirect()->route('dashboard.size.index');
+        }else{
+            alert()->error('แจ้งเตือน','เพิ่มขนาดของสินค้าไม่สำเร็จ');
+            return redirect()->route('dashboard.size.add');
+        }
+
+    }
+
+    public function SizeEdit($id=null)
+    {
+
+        $size = Size::find($id);
+
+        if(!empty($size->id))
+
+            return view(
+                'dashboard.size.edit',
+                [
+                    'size' => $size,
+                ]
+            );
+
+        else
+            return redirect()->route('dashboard.size.index');
+
+    }
+
+    public function SizeUpdate(Request $req, $id)
+    {
+
+        $size = Size::find($id);
+
+        if(empty($size->id))
+        {
+            alert()->error('แจ้งเตือน', 'ผิดพลาดไม่สามารถแก้ไขได้, โปรดลองใหม่อีกครั้ง');
+            print 'error record';
+            return redirect()->route('dashboard.size.index');
+        }
+
+        $req->validate(
+            [
+                'size_name' => 'required',
+                'size_sizes' => 'required',
+                'size_price' => 'required',
+            ],
+            [
+                'size_name.required' => '*โปรดกรอกชื่อขนาดของสินค้า',
+                'size_size.required' => '*โปรดกรอกขนาดของสินค้า',
+                'size_price.required' => '*โปรดกรอกราคาขนาดสินค้า',
+            ]
+        );
+
+        $update = $size->update(
+            [
+                'name' => $req->size_name,
+                'size' => $req->size_sizes,
+                'price' => $req->size_price,
+            ]
+        );
+
+        if(!empty($update))
+        {
+            alert()->success('แจ้งเตือน','แก้ไขประเภทสินค้าสำเร็จ');
+            return redirect()->route('dashboard.size.index');
+        }else{
+            alert()->error('แจ้งเตือน','แก้ไขประเภทสินค้าไม่สำเร็จ');
+            return redirect()->route('dashboard.size.add');
+        }
+
+    }
+
+    public function SizeDelete($id=null)
+    {
+
+        $size = Size::find($id);
+
+        if(!empty($size->id))
+        {
+            $size->delete();
+            alert()->success('แจ้งเตือน', 'ลบสำเร็จ');
+            return redirect()->route('dashboard.size.index');
+        }else{
+            alert()->error('แจ้งเตือน', 'ผิดพลาดไม่สามารถลบได้, โปรดลองใหม่อีกครั้ง');
+            return redirect()->route('dashboard.size.index');
         }
 
     }

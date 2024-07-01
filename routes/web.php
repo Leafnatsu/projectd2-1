@@ -116,6 +116,20 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'isAdmin'])-
     });
     // Route::get('category', [Dashboard::class, 'category'])->name('category');
 
+    Route::prefix(('size'))->name('size.')->group(function(){
+        
+        // First Page Admin
+        Route::get('/', [Dashboard::class, 'Size'])->name('index');
+        // Add Page
+        Route::get('add', [Dashboard::class, 'SizeAdd'])->name('add');
+        Route::post('add', [Dashboard::class, 'SizeInsert'])->name('insert');
+        // Edit Page
+        Route::get('edit/{id}', [Dashboard::class, 'SizeEdit'])->name('edit');
+        Route::post('edit/{id}', [Dashboard::class, 'SizeUpdate'])->name('update');
+        // Delete
+        Route::get('delete/{id}', [Dashboard::class, 'SizeDelete'])->name('delete');
+    });
+
 });
 
 // Route::get('/', function () {
