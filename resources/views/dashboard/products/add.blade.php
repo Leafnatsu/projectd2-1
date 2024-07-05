@@ -91,6 +91,8 @@
                                             type="file" name="product_image" id="ProductImage" />
                                     </div>
 
+
+                                
                                     <div class="mb-3">
                                         <label for="ProductDetail" class="form-label">
                                             รายละเอียดสินค้า

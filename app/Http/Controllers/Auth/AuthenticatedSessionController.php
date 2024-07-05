@@ -30,7 +30,15 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard.index'));
+        $auth = Auth::user();
+
+        if($auth->isActive == 0)
+        {
+            $this->destroy($request);
+            return redirect()->route('login')->with('status', 'บัญชีของคุณถูกปิดการใช้งาน');
+        }else{
+            return redirect()->intended(route('dashboard.index'));
+        }
 
     }
 

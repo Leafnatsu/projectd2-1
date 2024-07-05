@@ -39,8 +39,9 @@ class DashboardController extends Controller
             });
 
         }
-
-        $result = $product->paginate(10);
+        
+        $product->latest();
+        $result = $product->paginate(5);
 
         return view(
             'dashboard.products.index',
@@ -127,6 +128,30 @@ class DashboardController extends Controller
 
         else
             return redirect()->route('dashboard.product.index');
+
+    }
+
+    public function ProductEditSize($id=null, $size=null)
+    {
+
+        print $id;
+        $product = Products::find($id);
+
+        if(!empty($product->id))
+        {
+
+            $update = $product->update(
+                [
+                    'size' => $size,
+                ]
+            );
+
+            toast('แก้ไขสำเร็จ', 'success');
+            return redirect()->route('dashboard.product.index');
+
+        }else{
+            // return redirect()->route('dashboard.product.index');
+        }
 
     }
 
@@ -221,7 +246,7 @@ class DashboardController extends Controller
 
         }
 
-        $result = $category->paginate(10);
+        $result = $category->paginate(5);
 
         return view(
             'dashboard.category.index',
@@ -359,7 +384,8 @@ class DashboardController extends Controller
 
         }
 
-        $result = $user->paginate(10);
+        $user->where('isAdmin', 0);
+        $result = $user->paginate(5);
 
         return view(
             'dashboard.user.index',
@@ -388,7 +414,7 @@ class DashboardController extends Controller
 
         }
 
-        $result = $order->paginate(10);
+        $result = $order->paginate(5);
 
         return view(
             'dashboard.order.index',
@@ -419,30 +445,32 @@ class DashboardController extends Controller
         return redirect()->route('dashboard.user.index');
     }
 
-    public function UpdateStatus(Request $req)
+    public function UpdateStatus($order_id=null, $order_code=null)
     {
-
         if(
-            empty($req->order_id) &&
-            empty($req->confirmSlip)
+            empty($order_id) &&
+            empty($order_code)
         )
         {
-            return redirect()->route('dashboard.order.index');
+            return redirect()->route('dashboard.user.index');
         }
 
-        $order = Order::find($req->order_id);
+        $order = Order::find($order_id);
 
-        if(!empty($order->id))
+        if(
+            !empty($order->id) &&
+            $order_code == $order->order_code
+        )
         {
 
             $update = $order->update(["status" => 1]);
 
             if($update)
             {
-                alert()->success('อณุมัติการทำรายการสำเร็จ');
+                alert()->success('ยกเลิกรายการสำเร็จ');
                 return redirect()->route('dashboard.order.index');
             }else{
-                alert('อณุมัติการทำรายการไม่สำเร็จ');
+                alert('ยกเลิกรายการไม่สำเร็จ');
                 return redirect()->route('dashboard.order.index');
             }
 
@@ -470,7 +498,7 @@ class DashboardController extends Controller
 
         }
 
-        $result = $size->paginate(10);
+        $result = $size->paginate(5);
 
         return view(
             'dashboard.size.index',
@@ -694,7 +722,7 @@ class DashboardController extends Controller
     //     return view(
     //         'dashboard.products.index',
     //         [
-    //             'products' => Products::paginate(10),
+    //             'products' => Products::paginate(5),
     //             'categorys' => Category::all(),
     //         ]
     //     );
@@ -736,7 +764,7 @@ class DashboardController extends Controller
     //     return view(
     //         'dashboard.category.index',
     //         [
-    //             'categorys' => Category::paginate(10),
+    //             'categorys' => Category::paginate(5),
     //         ]
     //     );
     // }

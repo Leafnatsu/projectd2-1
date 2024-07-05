@@ -41,37 +41,42 @@
                     @if (!empty($item->product))
 
                         @foreach ($item->product as $product)
-                        <div class="col-lg-4 d-flex ftco-animate mx-auto">
-                                <div class="services-wrap d-flex">
+                            <div class="col-lg-4 d-flex ftco-animate mx-auto br">
+                                <div class="services-wrap d-flex border border-start-0 border-5 border-dark">
                                     <a href="{{ asset($product->image) }}" data-lightbox="{{ $product->id }}"
-                                        data-title="{{ $product->name }}" class="img text-dark border border-start-0 border-5"
+                                        data-title="{{ $product->name }}" class="img text-dark border border-start-0 border-5 border-dark"
                                         style="background-image: url('{{ asset($product->image) }}');"></a>
                                     <div class="text p-4">
-                                        <h2 class="text-dark">
-                                            {{ $product->name }}
-                                        </h2>
-                                        <p class="text-dark h5">{{ $product->detail }}</p>
+                                        <h4 class="text-dark">
+                                            <b>{{ $product->name }}</b>
+                                        </h4>
+                                        <small class="text-dark h6 mt-auto">{{ $product->detail }}</small>
                                         <p class="price">
-                                            <span class="text-dark h5">{{ number_format($product->price, 2) }}฿</span>
-                                            <form action="{{ route('cart.add') }}" method="post" class="mt-2 text-dark">
+                                            <form action="{{ route('cart.add') }}" method="post" class="mt-2 text-dark ">
                                                 @csrf
                                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                                @if ($product->size == 1)
-                                                    <select name="size" class="form-control mb-2 text-dark" style="color:black;">
+                                                {{-- @if ($product->size == 1)
+                                                    <select name="size" class="form-control mb-2 text-dark h7" style="color:black;">
                                                         <option value="S" class="text-dark">ขนาด S</option>
                                                         <option value="M" class="text-dark">ขนาด M</option>
                                                         <option value="L" class="text-dark">ขนาด L</option>
                                                     </select>
-                                                @endif
+                                                @endif --}}
                                                 <input type="number" name="quantity" value="1" min="1" class="form-control mb-2 text-dark">
                                                 <button type="submit" class="btn btn-dark btn-outline-white btn-lg">
                                                     สั่งอาหาร
+                                                    
                                                 </button>
+                                                <a style="float: right; font-weight: bold;">{{ number_format($product->price, 2) }}฿</a>
+
                                             </form>
+                                            <br>
                                         </p>
                                     </div>
                                 </div>
                             </div>
+                            
+                        
                         @endforeach
 
                     @else
@@ -82,6 +87,8 @@
 
                 </div>
             </div>
+            
+
 
         @endforeach
 
@@ -97,5 +104,6 @@
             </div>
         @endif
     </section>
+    <br>
 
 @endsection

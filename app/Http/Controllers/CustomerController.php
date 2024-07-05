@@ -89,7 +89,7 @@ class CustomerController extends Controller
 
             }
 
-            return redirect()->route('cart.index');
+            return redirect()->route('menu.index');
 
         }else{
             return redirect()->route('menu.index');
@@ -292,10 +292,10 @@ class CustomerController extends Controller
                 ]
             );
 
-            return redirect()->route('cart.index');
+            return redirect()->route('order.index');
 
         }else{
-            return redirect()->route('cart.index');
+            return redirect()->route('order.index');
         }
 
     }
@@ -314,9 +314,9 @@ class CustomerController extends Controller
     {
 
         $auth = Auth::user();
-
         $order = Orders::query()
             ->where('user_id', $auth->id)
+            ->latest()
         ->paginate(5);
 
         return view(
@@ -366,20 +366,23 @@ class CustomerController extends Controller
 
     }
 
-    public function CancelPayment(Request $req)
+    public function CancelPayment($order_id=null, $order_code=null)
     {
 
         if(
-            empty($req->order_id) &&
-            empty($req->confirmSlip)
+            empty($order_id) &&
+            empty($order_code)
         )
         {
             return redirect()->route('order.index');
         }
 
-        $order = Orders::find($req->order_id);
+        $order = Orders::find($order_id);
 
-        if(!empty($order->id))
+        if(
+            !empty($order->id) &&
+            $order_code == $order->order_code
+        )
         {
 
             $update = $order->update(["status" => 2]);

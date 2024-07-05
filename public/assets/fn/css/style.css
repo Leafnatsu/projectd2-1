@@ -75,7 +75,7 @@ hr {
   height: 0;
   overflow: visible; }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, h7 {
   margin-top: 0;
   margin-bottom: 0.5rem; }
 
@@ -304,8 +304,8 @@ template {
 [hidden] {
   display: none !important; }
 
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
+h1, h2, h3, h4, h5, h6, h7,
+.h1, .h2, .h3, .h4, .h5, .h6 ,.h7 {
   margin-bottom: 0.5rem;
   font-family: "Prompt";
   font-weight: 500;
@@ -329,6 +329,14 @@ h5, .h5 {
 
 h6, .h6 {
   font-size: 1rem; }
+
+h7, .h7 {
+  font-size: 0.75rem; }
+
+.text-rigth{
+  text-align: right;
+}
+
 
 .lead {
   font-size: 1.25rem;
@@ -499,7 +507,10 @@ pre {
   .no-gutters > .col,
   .no-gutters > [class*="col-"] {
     padding-right: 0;
-    padding-left: 0; }
+    padding-left: 0; 
+    padding-top: 15px; 
+    padding-bottom: 15px; 
+    }
 
 .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col,
 .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm,
@@ -7897,11 +7908,11 @@ h1, h2, h3, h4, h5,
   .services-wrap .img {
     display: block; }
   .services-wrap .text {
-    background: rgba(255, 250, 224,1);
+    background: rgb(231 192 77);
     position: relative; }
     .services-wrap .text h3 {
       font-size: 20px; }
-    .services-wrap .text .price {
+    .services-wrap .text .ftco {
       font-size: 16px;
       margin-bottom: 0; }
       .services-wrap .text .price span {
@@ -8513,6 +8524,10 @@ textarea.form-control {
     background: #000;
     opacity: .8; }
 
+    .ftco-contaner{
+      padding-bottom: 15px;
+      margin-top: 15px ;
+    }
 .ftco-counter {
   padding: 7em 0; }
   @media (max-width: 1199.98px) {
@@ -9023,3 +9038,7 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+
+
+
+

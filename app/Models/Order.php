@@ -16,8 +16,6 @@ class Order extends Model
 
     protected $table = 'orders';
 
-    protected $fillable = ['status'];
-
     protected $guarded = [
 
         'created_at',

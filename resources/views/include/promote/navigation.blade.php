@@ -31,10 +31,15 @@
                         @if(Auth::user()->isAdmin == 1)
                         <li class="nav-item">
                             <a href="{{ route('dashboard.index') }}">
-                                สำหรับผู้ดูแลระบบ
+                                สำหรับผู้ดูแลระบบ |
                             </a>
                         </li>
                         @endif
+                        <li class="nav-item">
+                            <a href="{{ route('logout') }}" class="mx-1">
+                                ออกจากระบบ
+                            </a>
+                        </li>
                     @else
                     <li class="nav-item"><a href="{{ route('login') }}">
                             เข้าสู่ระบบ |

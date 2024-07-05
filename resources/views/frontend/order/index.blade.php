@@ -50,6 +50,7 @@
 
                                             <div class="col-12 mb-2 mt-2">
                                                 <div class="float-left mx-3">
+                                                    {{-- <a style="text-align: left">asd</a> --}}
                                                     <img 
                                                         class="img-fluid rounded mx-2" 
                                                         width="64px"
@@ -115,7 +116,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">
+                                            <h5 class="modal-title text-dark" id="exampleModalLabel">
                                                 ยืนยันการยกเลิกรายการ
                                             </h5>
                                         </div>
@@ -127,7 +128,7 @@
                                                 ปิดหน้าต่าง
                                             </button>
                                             <a
-                                                href="{{route('order.cancel')}}"
+                                                href="{{ route('order.cancel', ["order_id" => $i->id, "order_code" => $i->order_code]) }}"
                                                 class="btn btn-danger"
                                             >
                                                 ยืนยันการยกเลิกรายการ
@@ -152,7 +153,7 @@
                                         </div>
                                         <form action="{{route('order.confirm')}}" method="post" enctype="multipart/form-data">
                                             @csrf
-                                            <input type="hidden" name="order_id" value="{{$i->id}}">
+                                            <input type="hidden" name="order_id" value="{{$i->id}}" required />
                                             <div class="modal-body text-dark">
                                                 <div class="form-group mx-2">
 
@@ -194,6 +195,7 @@
                                                                 name="confirmSlip" 
                                                                 placeholder="ใบรายการชำระเงิน"
                                                                 accept="image/png, image/jpg, image/jpeg"
+                                                                required
                                                             />
                                                             <small id="confirmSlip" class="form-text text-muted">
                                                                 รองรับไฟล์รูปภาพ jpeg, jpg, png

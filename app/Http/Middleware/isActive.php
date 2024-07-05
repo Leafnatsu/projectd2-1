@@ -11,11 +11,16 @@ class isActive
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && !Auth::user()->isActive) {
+
+        if (
+            Auth::user()->isActive == 1
+        ){
+            return $next($request);
+        }else{
             Auth::logout();
-            return redirect()->route('login')->withErrors(['Your account has been disabled.']);
+            toast('บัญชีของคุณถูกปิดการใช้งาน','error');
+            return redirect()->route('login');
         }
 
-        return $next($request);
     }
 }

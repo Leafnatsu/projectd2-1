@@ -146,29 +146,30 @@
                         <div class="text p-4">
                             <h3 class="text-dark">Hawaiian Pizza</h3>
                             <p class="text-dark">ทำจากแป้งพิซซ่าและซอสพิซซ่าสูตรพิเศษ โรยหน้าด้วยมอสซาเรลล่าชีส ใส่ท็อปปิ้ง เป็นแฮมไก่ และสับปะรด โรยหน้าทับด้วยมอสซาเรลล่าชีส อีก 1 ชั้น</p>
-                            <p class="price"><span class="text-dark">149.00฿</span>
+                            <p class="price"><span class="text-dark">79.00฿</span>
                                 <a href="#" class="ml-2 btn btn-dark btn-outline-white">Order</a></p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 d-flex ftco-animate mx-auto">
                     <div class="services-wrap d-flex">
-                        <a href="#" class="img border border-start-0 border-5" style="background-image: url(assets/fn/images/pizza-1.jpg);"></a>
+                        <a href="#" class="img border border-start-0 border-5" style="background-image: url(assets/fn/images/pizza-2.jpg);"></a>
                         <div class="text p-4">
-                            <h3 class="text-dark">Hawaiian Pizza</h3>
-                            <p class="text-dark">ทำจากแป้งพิซซ่าและซอสพิซซ่าสูตรพิเศษ โรยหน้าด้วยมอสซาเรลล่าชีส ใส่ท็อปปิ้ง เป็นแฮมไก่ และสับปะรด โรยหน้าทับด้วยมอสซาเรลล่าชีส อีก 1 ชั้น</p>
-                            <p class="price"><span class="text-dark">149.00฿</span>
+                            <h3 class="text-dark">Seafood Pizza</h3>
+                            <p class="text-dark">ทำจากแป้งพิซซ่าและซอสพิซซ่าสูตรพิเศษ โรยหน้าด้วยน็อตซาเรลล่าชีส ใส่ท็อปปิ้ง เป็นกุ้ง ปู หมึกหลอด ในซอสต้มยำ โรยหน้าด้วยมอสซาเรลล่าชีส อีก 1 ชั้น</p>
+                            <p class="price"><span class="text-dark">79.00฿</span>
                                 <a href="#" class="ml-2 btn btn-dark btn-outline-white">Order</a></p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 d-flex ftco-animate mx-auto">
                     <div class="services-wrap d-flex">
-                        <a href="#" class="img border border-start-0 border-5" style="background-image: url(assets/fn/images/pizza-1.jpg);"></a>
+                        <a href="#" class="img border border-start-0 border-5" style="background-image: url(assets/fn/images/pizza-3.jpg);"></a>
                         <div class="text p-4">
-                            <h3 class="text-dark">Hawaiian Pizza</h3>
-                            <p class="text-dark">ทำจากแป้งพิซซ่าและซอสพิซซ่าสูตรพิเศษ โรยหน้าด้วยมอสซาเรลล่าชีส ใส่ท็อปปิ้ง เป็นแฮมไก่ และสับปะรด โรยหน้าทับด้วยมอสซาเรลล่าชีส อีก 1 ชั้น</p>
-                            <p class="price"><span class="text-dark">149.00฿</span>
+                            <h3 class="text-dark">Mala Pizza	</h3>
+                            <p class="text-dark">ทำจากแป้งพิซซ่า และซอสพิซซ่าสูตรพิเศษ โรยหน้าด้วยมอสซาเรลล่าชีส ใส่ท็อปปิ้ง เป็นแฮมและไส้กรอกรมควัน ในซอสหม่าล่า และโรยหน้าด้วยมอสซาเรลล่าชีสอีก 1 ชั้น	
+                            </p>
+                            <p class="price"><span class="text-dark">79.00฿</span>
                                 <a href="#" class="ml-2 btn btn-dark btn-outline-white">Order</a></p>
                         </div>
                     </div>

@@ -9,14 +9,11 @@
     </header>
 
     <div>
-
         @yield('content')
-
     </div>
 
     <footer>
         @include('include.promote.footer')
     </footer>
-
 </body>
 </html>

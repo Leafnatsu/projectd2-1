@@ -1,6 +1,15 @@
 @extends('layouts.admin')
 @section('search.target', route("dashboard.product.index"))
+
 @section('content')
+
+    <script>
+        function editSize(url=null)
+        {
+            document.location.href = url;
+        }
+    </script>
+
     <div class="content-wrapper">
 
         <div class="container mt-5">
@@ -35,6 +44,7 @@
                                     <th>ราคา</th>
                                     <th>รูปภาพ</th>
                                     <th>รายละเอียด</th>
+                                    <th>เลือกขนาดของสินค้า</th>
                                     <th>จัดการ</th>
                                 </tr>
                             </thead>
@@ -70,7 +80,24 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                {{ $item->detail }}
+                                                {{-- {{ $item->detail }} --}}
+                                                <button 
+                                                    class="btn btn-info btn-sm"
+                                                    onclick="Swal.fire('{{ $item->detail }}')"
+                                                >
+                                                    อ่านเพิ่ม
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <div class="form-check">
+                                                    <input 
+                                                        class="form-check-input" 
+                                                        type="checkbox"
+                                                        onclick="editSize('{{ route('dashboard.product.edit.enableSize', ['id' => $item->id, 'size' => $item->size == 0 ? '1' : '0']) }}')"
+                                                        id="sizeId{{ $item->id }}"
+                                                        {{ $item->size == 1 ? 'checked' : null }}
+                                                    />
+                                                  </div>
                                             </td>
                                             <td>
 
@@ -145,4 +172,7 @@
 
         </div>
     </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 @endsection

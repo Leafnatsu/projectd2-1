@@ -11,6 +11,7 @@ use Illuminate\Validation\ValidationException;
 
 class LoginRequest extends FormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -23,12 +24,26 @@ class LoginRequest extends FormRequest
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
-     */
+    */
     public function rules(): array
     {
         return [
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+
+            'email.required' => 'โปรดกรอกอีเมล์',
+            'email.string' => 'โปรดกรอกอีเมล์เป็นคัวอักษรผสมตัวเลข',
+            'email.email' => 'ประเภทอีเมล์ไม่ถูกต้อง',
+
+            'password.required' => 'โปรดกรอกรหัสผ่าน',
+            'password.string' => 'โปรดกรอกรหัสผ่านเป็นคัวอักษรผสมตัวเลข',
+
         ];
     }
 
@@ -39,17 +54,22 @@ class LoginRequest extends FormRequest
      */
     public function authenticate(): void
     {
+
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) 
+        {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                // 'email' => trans('auth.failed'),
+                'auth.message' => 'ชื่อผู้ใช้ หรือ รหัสผ่าน ไม่ถูกต้อง',
             ]);
+
         }
 
         RateLimiter::clear($this->throttleKey());
+        
     }
 
     /**
@@ -77,9 +97,10 @@ class LoginRequest extends FormRequest
 
     /**
      * Get the rate limiting throttle key for the request.
-     */
+    */
     public function throttleKey(): string
     {
         return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
     }
+
 }

@@ -19,11 +19,12 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th class="">ลำดับ</th>
+                                    <th class="active">
+                                        ลำดับ
+                                    </th>
                                     <th>ชื่อ</th>
                                     <th>Email</th>
                                     <th>ที่อยู่</th>
-                                    <th>รหัส</th>
                                     <th>เบอร์โทรศัพท์</th>
                                     <th>จัดการ</th>
                                 </tr>
@@ -36,7 +37,6 @@
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->email }}</td>
                                             <td>{{ $item->address }}</td>
-                                            <td>{{ $item->password }}</td>
                                             <td>{{ $item->phone }}</td>
                                             <td>
                                             @if ($item->status)

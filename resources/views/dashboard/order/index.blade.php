@@ -6,7 +6,7 @@
         <div class="container mt-5">
             <div class="float-start">
                 <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">
-                    จัดการ/</span> สมาชิก
+                    จัดการ/</span> รายการสั่งสินค้า
                 </h4>
         <!-- Content -->
         <div class="container-xxl flex-grow-1">
@@ -97,7 +97,7 @@
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="exampleModalLabel">
-                                                                ยืนยันการลบ
+                                                                อณุมิตคำสั่งซื้อ
                                                             </h5>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
@@ -143,7 +143,7 @@
                                                                     ยกเลิก
                                                                 </button>
                                                                 <a
-                                                                    href="{{ route('dashboard.order.update', $item->id) }}"
+                                                                    href="{{ route('dashboard.order.update', ["order_id" => $item->id, "order_code" => $item->order_code]) }}"
                                                                     class="btn btn-success"
                                                                 >
                                                                     อณุมิตคำสั่งซื้อ

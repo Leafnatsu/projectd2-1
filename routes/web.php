@@ -19,7 +19,7 @@ Route::prefix('menu')->name('menu.')->group(function() {
 });
 
 // Cart
-Route::prefix('cart')->name('cart.')->middleware(['auth'])->group(function() {
+Route::prefix('cart')->name('cart.')->middleware(['auth', 'isActive'])->group(function() {
 
     // Root of Dashboard
     Route::get('/', [Front::class, 'cart'])->name('index');
@@ -41,14 +41,14 @@ Route::prefix('cart')->name('cart.')->middleware(['auth'])->group(function() {
 });
 
 // order
-Route::prefix('order')->name('order.')->group(function() {
+Route::prefix('order')->middleware(['auth', 'isActive'])->name('order.')->group(function() {
     
     // Root of Dashboard
     Route::get('/', [Front::class, 'order'])->name('index');
     // Confirm Payment
     Route::post('ConfirmPayment',[Front::class, 'ConfirmPayment'])->name('confirm');
     // Cancel
-    Route::get('CancelPayment',[Front::class, 'CancelPayment'])->name('cancel');
+    Route::get('cancel/order/{order_id}/code/{order_code}',[Front::class, 'CancelPayment'])->name('cancel');
     
 });
 
@@ -67,13 +67,17 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'isAdmin'])-
         // Add Page
         Route::get('add', [Dashboard::class, 'ProductAdd'])->name('add');
         Route::post('add', [Dashboard::class, 'ProductInsert'])->name('insert');
+
         // Edit Page
         Route::get('edit/{id}', [Dashboard::class, 'ProductEdit'])->name('edit');
+        Route::get('edit/{id}/{size}/ensize', [Dashboard::class, 'ProductEditSize'])->name('edit.enableSize');
         Route::post('edit/{id}', [Dashboard::class, 'ProductUpdate'])->name('update');
+
         // Delete
         Route::get('delete/{id}', [Dashboard::class, 'ProductDelete'])->name('delete');
 
     });
+
     Route::prefix('category')->name('category.')->group(function() {
 
         // First Page Admin
@@ -111,9 +115,10 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'isAdmin'])-
     Route::prefix('order')->name('order.')->group(function() {
 
         Route::get('/', [Dashboard::class, 'Order'])->name('index');
-        Route::post('UpdateStatus',[Dashboard::class, 'UpdateStatus'])->name('update');
+        Route::get('update/order/{order_id}/code/{order_code}',[Dashboard::class, 'UpdateStatus'])->name('update');
 
     });
+
     // Route::get('category', [Dashboard::class, 'category'])->name('category');
 
     Route::prefix(('size'))->name('size.')->group(function(){
