@@ -11,7 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('order', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('user_id')->nullable();
+            $table->string('order_code')->nullable();
+            $table->decimal('total_price',8,2)->nullable();
+            $table->longText('approve_payment')->nullable();
+            $table->integer('status')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -19,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('order');
     }
 };

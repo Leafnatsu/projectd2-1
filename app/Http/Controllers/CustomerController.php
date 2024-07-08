@@ -275,10 +275,19 @@ class CustomerController extends Controller
 
             // GENERATE and UPDATE ORDER CODE
             $order_code = 'GN' . DATE('Ymd') . $order->id;
-            Orders::find($order->id)->update(['order_code' => $order_code]);
+            
+            // Update Order Code
+            Orders::find($order->id)->update(
+                [
+                    'order_code' => $order_code
+                ]
+            );
 
             // ORDER ID TO CART
-            $get_cart_product = Cart::where('user_id', $auth->id)->whereNull('order_id')->get();
+            $get_cart_product = Cart::where('user_id', $auth->id)
+                ->whereNull('order_id')
+            ->get();
+            
             $cart_id = [];
 
             foreach($get_cart_product as $key => $cart_order)
@@ -307,7 +316,18 @@ class CustomerController extends Controller
 
     public function home()
     {
-        return view('frontend.home.index');
+        
+        $recommended_menu = Cart::groupBy('product_id')
+            ->selectRaw('product_id, count(*) As qty')
+        ->get();
+
+        return view(
+            'frontend.home.index',
+            [
+                'recommended_menu' => $recommended_menu,
+            ]
+        );
+
     }
 
     public function order()

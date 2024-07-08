@@ -1,6 +1,18 @@
 @extends('layouts.admin')
 @section('search.target', route("dashboard.user.index"))
 @section('content')
+
+    <script>
+        function view_image(url=null)
+        {
+            if(url != null)
+            {
+                Swal.fire({
+                    imageUrl: url,
+                });
+            }
+        }
+    </script>
     <div class="content-wrapper">
 
         <div class="container mt-5">
@@ -65,7 +77,7 @@
                                             </td>
                                             <td>
                                             @if(!empty($item->approve_payment))
-                                                <a href="{{ asset($item->approve_payment) }}"
+                                                {{-- <a href="{{ asset($item->approve_payment) }}"
                                                     data-lightbox="{{ $item->id }}"
                                                     data-title="{{ $item->name }}"
                                                 >
@@ -75,10 +87,16 @@
                                                         height="80px"
                                                         alt=""
                                                     />
-                                                </a>
+                                                </a> --}}
+                                                <button 
+                                                    class="btn btn-info btn-sm"
+                                                    onclick="view_image('{{ asset($item->approve_payment) }}')"
+                                                >
+                                                    รูปภาพ
+                                                </button>
                                             @else
                                                 <span class="badge text-danger">
-                                                    Nopic
+                                                    ไม่มีไฟล์แนบ
                                                 </span>
                                             @endif
                                             </td>
@@ -179,4 +197,7 @@
 
         </div>
     </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 @endsection

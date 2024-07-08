@@ -13,7 +13,7 @@ Route::get('/', [Front::class, 'home'])->name('home');
 // Menu
 Route::prefix('menu')->name('menu.')->group(function() {
 
-    // Root of Dashboard
+    // Root of MenuPage
     Route::get('/', [Front::class, 'menu'])->name('index');
 
 });
@@ -21,7 +21,7 @@ Route::prefix('menu')->name('menu.')->group(function() {
 // Cart
 Route::prefix('cart')->name('cart.')->middleware(['auth', 'isActive'])->group(function() {
 
-    // Root of Dashboard
+    // Root of CartPage
     Route::get('/', [Front::class, 'cart'])->name('index');
 
     // Add Product to Cart
@@ -43,7 +43,7 @@ Route::prefix('cart')->name('cart.')->middleware(['auth', 'isActive'])->group(fu
 // order
 Route::prefix('order')->middleware(['auth', 'isActive'])->name('order.')->group(function() {
     
-    // Root of Dashboard
+    // Root of OrderPage
     Route::get('/', [Front::class, 'order'])->name('index');
     // Confirm Payment
     Route::post('ConfirmPayment',[Front::class, 'ConfirmPayment'])->name('confirm');
