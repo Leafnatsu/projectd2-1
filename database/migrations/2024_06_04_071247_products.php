@@ -19,9 +19,10 @@ return new class extends Migration
             $table->string('detail')->nullabale();
             $table->integer('price')->nullabale();
             $table->string('image')->nullabale();
-            $table->integer('size')->default(0);
-            $table->integer('deleted_at')->nullable();
+            $table->integer('size')->default('0');
+            
             $table->timestamps();
+            $table->softDeletes();
         });
 
     }

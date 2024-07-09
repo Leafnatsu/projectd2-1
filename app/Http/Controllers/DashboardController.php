@@ -15,9 +15,34 @@ use App\Models\Size;
 class DashboardController extends Controller
 {
 
-    public function Index()
+    public function Index(Request $req)
     {
-        return view('dashboard.admin');
+
+        $user = User::query();
+
+        if(!empty($req->search))
+        {
+
+            $keyword = $req->search;
+
+            $user->where(function ($query) use ($keyword) {
+
+                $query->where('name', 'LIKE', '%' .$keyword. '%');
+
+            });
+
+        }
+
+        $user->where('isAdmin', 0);
+        $result = $user->paginate(5);
+
+        return view(
+            'dashboard.index',
+            [
+                'user' => $result,
+            ]
+        );
+
     }
 
     public function Product(Request $req)

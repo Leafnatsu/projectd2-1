@@ -14,6 +14,7 @@ use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
+
     /**
      * Display the registration view.
      */
@@ -29,22 +30,51 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        $request->validate(
+            [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+                'address' => ['required'],
+                'phone' => ['required'],
+            ],
+            [
+                'name.required' => 'โปรดกรอกชื่อ-นามสกุล',
+                'name.string' => 'ห้ามใช้อักขระพิเศษ',
+                'name.max' => 'ชื่อ-นามสกุล ยาวเกินไป',
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+                'email.required' => 'โปรดกรอกอีเมล์',
+                'email.string' => 'ห้ามใช้อักขระพิเศษ',
+                'email.lowercase' => 'โปรดใช้ตัวพิมพ์เล็ก',
+                'email.email' => 'รูปแบบอีเมลไม่ถูกต้อง',
+                'email.max' => 'อีเมล์ยาวเกินไป',
+                'email.unique' => 'มีอีเมล์นี้ในระบบแล้ว',
+
+                'password.required' => 'โปรดกรอกรหัสผ่าน',
+                'password.confirmed' => 'โปรกรอกยืนยันรหัสผ่าน',
+
+                'address.required' => 'โปรดกรอกที่อยู่',
+
+                'phone.required' => 'โปรดกรอกเบอร์โทรศัพท์',
+            ]
+        );
+
+        $user = User::create(
+            [
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'address' => $request->address,
+                'phone' => $request->phone,
+            ]
+        );
 
         event(new Registered($user));
 
         Auth::login($user);
 
         return redirect(route('home', absolute: false));
+
     }
+
 }

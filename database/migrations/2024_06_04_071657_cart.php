@@ -20,6 +20,7 @@ return new class extends Migration
             $table->decimal('price',8,2)->nullable();
             $table->integer('quantity')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

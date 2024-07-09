@@ -1,13 +1,17 @@
 @extends('layouts.admin')
-@section('search.target', route("dashboard.user.index"))
+@section('search.target', route('dashboard.user.index'))
 @section('content')
     <div class="content-wrapper">
 
         <div class="container mt-5">
             <div class="float-start">
                 <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">
-                    จัดการ/</span> สมาชิก
+                        จัดการ/</span> สมาชิก
                 </h4>
+            </div>
+        </div>
+
+
         <!-- Content -->
         <div class="container-xxl flex-grow-1">
 
@@ -30,7 +34,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table-border-bottom-0">
-                                @if(!$user->isEmpty())
+                                @if (!$user->isEmpty())
                                     @foreach ($user as $key => $item)
                                         <tr>
                                             <td>{{ $user->total() - ($user->firstItem() + $key) + 1 }}</td>
@@ -39,15 +43,17 @@
                                             <td>{{ $item->address }}</td>
                                             <td>{{ $item->phone }}</td>
                                             <td>
-                                            @if ($item->status)
-                                                <a href="{{ route('dashboard.user.disable', $item->id) }}" class="btn btn-danger btn-sm">
-                                                    <i class='bx bx-x-circle'></i> ปิดการใช้งาน
-                                                </a>
-                                            @else
-                                                <a href="{{ route('dashboard.user.enable', $item->id) }}" class="btn btn-success btn-sm">
-                                                    <i class='bx bxs-check-circle'></i> เปิดการใช้งาน
-                                                </a>
-                                            @endif
+                                                @if ($item->status)
+                                                    <a href="{{ route('dashboard.user.disable', $item->id) }}"
+                                                        class="btn btn-danger btn-sm">
+                                                        <i class='bx bx-x-circle'></i> ปิดการใช้งาน
+                                                    </a>
+                                                @else
+                                                    <a href="{{ route('dashboard.user.enable', $item->id) }}"
+                                                        class="btn btn-success btn-sm">
+                                                        <i class='bx bxs-check-circle'></i> เปิดการใช้งาน
+                                                    </a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
@@ -69,7 +75,7 @@
 
             {{-- <hr class="my-5"> --}}
 
-            @if(!$user->isEmpty())
+            @if (!$user->isEmpty())
                 <div class="d-flex mx-auto mt-4">
                     {{ $user->links() }}
                 </div>

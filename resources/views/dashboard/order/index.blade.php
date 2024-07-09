@@ -20,6 +20,8 @@
                 <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">
                     จัดการ/</span> รายการสั่งสินค้า
                 </h4>
+            </div>
+        </div>
         <!-- Content -->
         <div class="container-xxl flex-grow-1">
 

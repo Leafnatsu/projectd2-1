@@ -33,6 +33,33 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-3 col-md-6 mb-5 mb-md-5">
+                <div class="ftco-footer-widget mb-4">
+                    <h2 class="ftco-heading-2">หน้าหลัก</h2>
+                    <div class="block-23 mb-3">
+                        <ul>
+                            <li>
+                                <a href="{{ route('home') }}">หน้าแรก</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('menu.index') }}">รายการสินค้า</a>
+                            </li>
+                            @auth
+                            <li><a href="{{ route('cart.index') }}">
+                                    ตะกร้าสินค้า
+                                </a></li>
+                            <li><a href="{{ route('order.index') }}">
+                                    คำสั่งซื้อ
+                                </a></li>
+                            @else
+                            <li><a href="{{ route('login') }}">
+                                ตะกร้าสินค้า
+                                </a></li>
+                            @endauth
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </footer>

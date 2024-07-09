@@ -19,6 +19,7 @@ return new class extends Migration
             $table->longText('approve_payment')->nullable();
             $table->integer('status')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

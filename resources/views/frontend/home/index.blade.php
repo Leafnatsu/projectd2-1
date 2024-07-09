@@ -22,7 +22,7 @@
             <div class="overlay"></div>
             <div class="container">
                 <div class="row slider-text align-items-center" data-scrollax-parent="true">
-                    @foreach ($recommended_menu->slice(0,1) as $key => $item)
+                    @foreach ($recommended_menu->slice(2,1) as $key => $item)
                         <div class="col-md-6 col-sm-12 ftco-animate">
                             <span class="subheading">Delicious</span>
                             <h1 class="mb-4">{{ $item->product->name }}</h1>
@@ -48,7 +48,7 @@
             <div class="overlay"></div>
             <div class="container">
                 <div class="row slider-text align-items-center" data-scrollax-parent="true">
-                    @foreach ($recommended_menu->slice(1,1) as $key => $item)
+                    @foreach ($recommended_menu->slice(3,1) as $key => $item)
                         <div class="col-md-6 col-sm-12 order-md-last ftco-animate">
                             <span class="subheading">Crunchy</span>
                             <h1 class="mb-4">{{ $item->product->name }}</h1>
@@ -156,12 +156,7 @@
                     {{ $item->product_id }}
                 </td>
                 <td>
-                    <img 
-                        src="{{ asset($item->product->image) }}" 
-                        width="100px"
-                        height="80px"
-                        alt=""
-                    >
+                    {{ $item->product->name }}
                 </td>
             </tr>
             @endforeach
@@ -178,7 +173,7 @@
         </div>
         <div class="container-wrap">
             <div class="row no-gutters d-flex">
-                @foreach ($recommended_menu->slice(0,3) as $key => $item)
+                @foreach ($recommended_menu->slice(6,3) as $key => $item)
                     <div class="col-lg-4 d-flex ftco-animate mx-auto">
                         <div class="services-wrap d-flex">
                             <a href="#" class="img border border-start-0 border-5" style="background-image">
@@ -199,6 +194,7 @@
                     </div>
                 @endforeach
             </div>
+        </div>
     </section>
 
 @stop
