@@ -185,8 +185,15 @@
                                                     
                                                     @if($i->status == 0)
                                                         <div class="mx-auto d-block">
-                                                            <label for="confirmSlip">
-                                                                แนบใบรายการชำระเงิน
+                                                            <label for="confirmSlip" class="h5 text-dark">
+                                                                สแกน qr code เพื่อทําการชําระสินค้า 
+                                                                <br>
+                                                                และแนบใบรายการชำระเงิน
+                                                                <img 
+                                                                    src="{{ asset('assets/fn/images/QR_code.jpg') }}" 
+                                                                    width="100%"
+                                                                    height="100%"
+                                                                />
                                                             </label>
                                                             <input 
                                                                 type="file" 

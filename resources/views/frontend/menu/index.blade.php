@@ -1,7 +1,7 @@
 @extends('layouts.promote')
 @section('content')
 
-    <section class="home-slider owl-carousel img" style="background-image: url(assets/fn/images/bg_1.jpg);">
+    <section class="home-slider owl-carousel img" style="background-image: url(assets/fn/images/bg_3.jpg);">
 
         <div class="slider-item" style="background-image: url(assets/fn/images/bg_3.jpg);">
             <div class="overlay"></div>
