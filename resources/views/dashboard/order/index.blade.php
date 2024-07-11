@@ -195,6 +195,11 @@
 
             {{-- <hr class="my-5"> --}}
 
+            @if(!$order->isEmpty())
+                <div class="d-flex mx-auto mt-4">
+                    {{ $order->links() }}
+                </div>
+            @endif
             {{-- <div class="content-backdrop fade"></div> --}}
 
         </div>

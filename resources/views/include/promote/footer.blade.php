@@ -2,13 +2,13 @@
     <div class="overlay"></div>
     <div class="container">
         <div class="row ">
-            <div class="col-lg-3 col-md-6 mb-5 mb-md-5">
+            <div class="col-lg-6 col-md-6 mb-5 mb-md-5">
                 <div class="ftco-footer-widget mb-4">
-                    <h2 class="ftco-heading-2">About Us</h2>
-                    <p>ร้าน Giant Pizza ของคุณอาภัชรี เวชรเดชา
+                    <h2 class="ftco-heading-2 ">About Us</h2>
+                    <p class="h5">ร้าน Giant Pizza ของคุณอาภัชรี เวชรเดชา
                         มีจุดเริ่มต้นจากการที่คุณอาภัชรีต้องการหารายได้เสริมจากการทำงานประจำ
                         จึงเริ่มจากการทำอาหารที่รักและต้องการท้าทายตัวเองโดยเลือกทำเมนูที่ตัวเองไม่เคยทำมาก่อน
-                        ก็คือพิซซ่า โดยคุณอาภัชรีเริ่มจากการคิดสูตรและทดลองต่างๆ
+                        ก็คือพิซซ่า โดยคุณอาภัชรีเริ่มจากการคิดสูตรและทดลองต่างๆ    
                         จนได้รสชาติที่อร่อยลงตัวและถูกปากลูกค้าเป็นอย่างมาก
                         จนตอนนี้คุณอาภัชรีได้ออกจากงานประจำแล้วหันมาทำร้านเต็มตัว</p>
                     {{-- <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
@@ -20,14 +20,14 @@
             </div>
             <div class="col-lg-3 col-md-6 mb-5 mb-md-5">
                 <div class="ftco-footer-widget mb-4">
-                    <h2 class="ftco-heading-2">Contact Us</h2>
-                    <div class="block-23 mb-3">
+                    <h2 class="ftco-heading-2 ">Contact Us</h2>
+                    <div class="block-23 mb-3 h5">
                         <ul>
-                            <li><span class="icon icon-map-marker"></span><span class="text">2456
+                            <li><span class="icon icon-map-marker h5"></span><span class="text">2456
                                     หมู่บ้านเสนาวิลล่าถนนแฮปปี้แลนด์ แขวงคลองจั่น เขตบางกะปิ กรุงเทพฯ 10240</span></li>
-                            <li><a><span class="icon icon-phone"></span><span class="text">090 - 664 -
+                            <li><a><span class="icon icon-phone h5"></span><span class="text">090 - 664 -
                                         6949</span></a></li>
-                            <li><a><span class="icon icon-envelope"></span><span
+                            <li><a><span class="icon icon-envelope h5"></span><span
                                         class="text">yaminlunla@hotmail.com</span></a></li>
                         </ul>
                     </div>
@@ -35,8 +35,8 @@
             </div>
             <div class="col-lg-3 col-md-6 mb-5 mb-md-5">
                 <div class="ftco-footer-widget mb-4">
-                    <h2 class="ftco-heading-2">หน้าหลัก</h2>
-                    <div class="block-23 mb-3">
+                    <h2 class="ftco-heading-2 h5">หน้าหลัก</h2>
+                    <div class="block-23 mb-3 h5">
                         <ul>
                             <li>
                                 <a href="{{ route('home') }}">หน้าแรก</a>

@@ -50,7 +50,7 @@
                                         <h4 class="text-dark">
                                             <b>{{ $product->name }}</b>
                                         </h4>
-                                        <small class="text-dark h6 mt-auto">{{ $product->detail }}</small>
+                                        <small class="text-dark h5 mt-auto">{{ $product->detail }}</small>
                                         <p class="price">
                                             <form action="{{ route('cart.add') }}" method="post" class="mt-2 text-dark ">
                                                 @csrf
@@ -62,7 +62,8 @@
                                                         <option value="L" class="text-dark">ขนาด L</option>
                                                     </select>
                                                 @endif --}}
-                                                <input type="number" name="quantity" value="1" min="1" class="form-control mb-2 text-dark">
+                                                <p class="text-dark h3">จำนวน</p>
+                                                <input type="number" style="text-align:right;" name="quantity" value="1" min="1" class="form-control mb-2 text-dark">
                                                 <button type="submit" class="btn btn-dark btn-outline-white btn-lg">
                                                     สั่งอาหาร
                                                     

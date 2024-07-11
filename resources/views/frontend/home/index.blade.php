@@ -27,7 +27,7 @@
                             <span class="subheading">Delicious</span>
                             <h1 class="mb-4">{{ $item->product->name }}</h1>
                             <p>
-                                <a
+                                <a  
                                     href="{{ route('menu.index') }}"
                                     class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3"
                                 >
@@ -167,7 +167,7 @@
         <div class="container">
             <div class="row justify-content-center mb-5 pb-3">
                 <div class="col-md-7 heading-section ftco-animate text-center">
-                    <h2 class="mb-4">Hot Menu</h2>
+                    <h1 class="mb-4">Hot Menu</h1>
                 </div>
             </div>
         </div>
