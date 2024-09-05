@@ -15,8 +15,6 @@ return new class extends Migration
         Schema::create('category', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullabale();
-            $table->integer('created_by')->nullable()->comment('user ที่เพิ่ม');
-            $table->integer('updated_by')->nullable()->comment('user ที่แก้ไข');
             $table->timestamps();
             $table->softDeletes();
         });

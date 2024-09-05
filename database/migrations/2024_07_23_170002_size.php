@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+
+        Schema::create('size', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->nullable();
-            $table->string('order_code')->nullable();
-            $table->decimal('total_price',8,2)->nullable();
-            $table->longText('approve_payment')->nullable();
-            $table->integer('status')->nullable();
+            $table->string('name',100)->nullabale();
+            $table->string('size',1)->nullabale();
+            $table->bigInteger('order_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
+
     }
 
     /**
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('size');
     }
 };

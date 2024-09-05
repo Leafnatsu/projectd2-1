@@ -82,8 +82,8 @@ class CustomerController extends Controller
                     [
                         'user_id' => $auth->id,
                         'product_id' => $req->product_id,
-                        'price' => ($product_checker->price * $req->quantity),
                         'quantity' => $req->quantity,
+                        'price' => ($product_checker->price * $req->quantity),
                     ]
                 );
 

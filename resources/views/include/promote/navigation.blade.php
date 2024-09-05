@@ -30,24 +30,24 @@
                     @auth
                         @if(Auth::user()->isAdmin == 1)
                         <li class="nav-item">
-                            <a href="{{ route('dashboard.index') }}">
-                                สำหรับผู้ดูแลระบบ |
+                            <a href="{{ route('dashboard.index') }}" class="button2 rounded mx-1">
+                                <span>สำหรับผู้ดูแลระบบ</span>
                             </a>
                         </li>
                         @endif
                         <li class="nav-item">
-                            <a href="{{ route('logout') }}" class="mx-1">
-                                ออกจากระบบ
+                            <a href="{{ route('logout') }}" class="button2 mx-1" style="background-color: rgba(255, 0, 0, 0.644);">
+                                <span>ออกจากระบบ</span>
                             </a>
                         </li>
                     @else
-                    <li class="nav-item"><a href="{{ route('login') }}">
-                            เข้าสู่ระบบ |
+                    <li class="nav-item"><a href="{{ route('login') }}" class="button2  rounded">
+                            <span>เข้าสู่ระบบ</span>
                         </a></li>
 
                         @if (Route::has('register'))
-                        <li class="nav-item"><a href="{{ route('register') }}" class="mx-1">
-                                สมัครสมาชิก
+                        <li class="nav-item"><a href="{{ route('register') }}" class=" button2 mx-1  rounded" style="background-color: rgba(255,255,255,0.1);">
+                                <span>สมัครสมาชิก</span>
                             </a></li>
                         @endif
                     @endauth

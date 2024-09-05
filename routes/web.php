@@ -63,7 +63,7 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'isAdmin'])-
 
         // First Page Admin
         Route::get('/', [Dashboard::class, 'Product'])->name('index');
-
+        
         // Add Page
         Route::get('add', [Dashboard::class, 'ProductAdd'])->name('add');
         Route::post('add', [Dashboard::class, 'ProductInsert'])->name('insert');
