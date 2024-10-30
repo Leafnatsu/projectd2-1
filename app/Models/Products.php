@@ -35,4 +35,9 @@ class Products extends Model
         return $this->hasMany(Cart::class, 'product_id');
     }
 
+    public function recommend(): HasMany
+    {
+        return $this->hasMany(Recommend::class, 'products_id');
+    }
+
 }

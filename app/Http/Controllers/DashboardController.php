@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\Size;
+use App\Models\Recommend;
 
 class DashboardController extends Controller
 {
@@ -232,7 +233,7 @@ class DashboardController extends Controller
             return redirect()->route('dashboard.product.index');
         }else{
             alert()->error('แจ้งเตือน','แก้ไขการสินค้าไม่สำเร็จ');
-            return redirect()->route('dashboard.product.add');
+            return redirect()->route('dashboard.product.edit');
         }
 
     }
@@ -321,32 +322,86 @@ class DashboardController extends Controller
     public function CategoryEdit($id=null)
     {
 
-        $category = Category::find($id);
+        $recommend = Recommend::find($id);
 
-        if(!empty($category->id))
+        if(!empty($recommend->id))
 
             return view(
-                'dashboard.category.edit',
+                'dashboard.recommend.edit',
                 [
-                    'category' => $category,
+                    'recommend' => $recommend,
                 ]
             );
 
         else
-            return redirect()->route('dashboard.category.index');
+            return redirect()->route('dashboard.recommend.index');
+
+    }
+    public function RecommendAdd()
+    {
+        return view(
+            'dashboard.recommend.add',
+        );
+    }
+
+    public function RecommendInsert(Request $req)
+    {
+
+        $req->validate(
+            [
+                'recommend_name' => 'required',
+            ],
+            [
+                'recommend_name.required' => '*โปรดกรอกชื่อประเภทสินค้า',
+            ]
+        );
+
+        $create = Recommend::create(
+            [
+                'name' => $req->recommend_name,
+            ]
+        );
+
+        if(!empty($create))
+        {
+            alert()->success('แจ้งเตือน','เพิ่มประเภทสินค้าสำเร็จ');
+            return redirect()->route('dashboard.recommend.index');
+        }else{
+            alert()->error('แจ้งเตือน','เพิ่มประเภทสินค้าไม่สำเร็จ');
+            return redirect()->route('dashboard.recommend.add');
+        }
 
     }
 
-    public function CategoryUpdate(Request $req, $id)
+    public function RecommendEdit($id=null)
     {
 
-        $category = Category::find($id);
+        $recommend = Recommend::find($id);
 
-        if(empty($category->id))
+        if(!empty($recommend->id))
+
+            return view(
+                'dashboard.recommend.edit',
+                [
+                    'recommend' => $recommend,
+                ]
+            );
+
+        else
+            return redirect()->route('dashboard.recommend.index');
+
+    }
+
+    public function RecommendUpdate(Request $req, $id)
+    {
+
+        $recommend = Recommend::find($id);
+
+        if(empty($recommend->id))
         {
             alert()->error('แจ้งเตือน', 'ผิดพลาดไม่สามารถแก้ไขได้, โปรดลองใหม่อีกครั้ง');
             print 'error record';
-            return redirect()->route('dashboard.category.index');
+            return redirect()->route('dashboard.recommend.index');
         }
 
         $req->validate(
@@ -358,7 +413,7 @@ class DashboardController extends Controller
             ]
         );
 
-        $update = $category->update(
+        $update = $recommend->update(
             [
                 'name' => $req->category_name,
             ]
@@ -367,27 +422,27 @@ class DashboardController extends Controller
         if(!empty($update))
         {
             alert()->success('แจ้งเตือน','แก้ไขประเภทสินค้าสำเร็จ');
-            return redirect()->route('dashboard.category.index');
+            return redirect()->route('dashboard.recommend.index');
         }else{
             alert()->error('แจ้งเตือน','แก้ไขประเภทสินค้าไม่สำเร็จ');
-            return redirect()->route('dashboard.category.add');
+            return redirect()->route('dashboard.recommend.edit');
         }
 
     }
 
-    public function CategoryDelete($id=null)
+    public function RecommendDelete($id=null)
     {
 
-        $category = Category::find($id);
+        $recommend = Recommend::find($id);
 
-        if(!empty($category->id))
+        if(!empty($recommend->id))
         {
-            $category->delete();
+            $recommend->delete();
             alert()->success('แจ้งเตือน', 'ลบสำเร็จ');
-            return redirect()->route('dashboard.category.index');
+            return redirect()->route('dashboard.recommend.index');
         }else{
             alert()->error('แจ้งเตือน', 'ผิดพลาดไม่สามารถลบได้, โปรดลองใหม่อีกครั้ง');
-            return redirect()->route('dashboard.category.index');
+            return redirect()->route('dashboard.recommend.index');
         }
 
     }
@@ -635,7 +690,7 @@ class DashboardController extends Controller
             return redirect()->route('dashboard.size.index');
         }else{
             alert()->error('แจ้งเตือน','แก้ไขประเภทสินค้าไม่สำเร็จ');
-            return redirect()->route('dashboard.size.add');
+            return redirect()->route('dashboard.size.edit');
         }
 
     }

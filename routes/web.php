@@ -93,6 +93,21 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'isAdmin'])-
         Route::get('delete/{id}', [Dashboard::class, 'CategoryDelete'])->name('delete');
 
     });
+    Route::prefix('recommend')->name('recommend.')->group(function() {
+
+        // First Page Admin
+        Route::get('/', [Dashboard::class, 'Category'])->name('index');
+
+        // Add Page
+        Route::get('add', [Dashboard::class, 'CategoryAdd'])->name('add');
+        Route::post('add', [Dashboard::class, 'CategoryInsert'])->name('insert');
+        // Edit Page
+        Route::get('edit/{id}', [Dashboard::class, 'CategoryEdit'])->name('edit');
+        Route::post('edit/{id}', [Dashboard::class, 'CategoryUpdate'])->name('update');
+        // Delete
+        Route::get('delete/{id}', [Dashboard::class, 'CategoryDelete'])->name('delete');
+
+    });
 
     Route::prefix('user')->name('user.')->group(function() {
 
@@ -127,7 +142,9 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'isAdmin'])-
         Route::get('/', [Dashboard::class, 'Size'])->name('index');
         // Add Page
         Route::get('add', [Dashboard::class, 'SizeAdd'])->name('add');
-        Route::post('add', [Dashboard::class, 'SizeInsert'])->name('insert');
+        Route::post('add', [
+            
+            Dashboard::class, 'SizeInsert'])->name('insert');
         // Edit Page
         Route::get('edit/{id}', [Dashboard::class, 'SizeEdit'])->name('edit');
         Route::post('edit/{id}', [Dashboard::class, 'SizeUpdate'])->name('update');
